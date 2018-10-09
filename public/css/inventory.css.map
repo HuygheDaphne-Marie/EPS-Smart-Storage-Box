@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,WAAW,CAAC;EACV,WAAW,EAAE,MAAM;CACpB",
+    "sources": [
+        "inventory.scss"
+    ],
+    "names": [],
+    "file": "inventory.css"
+}

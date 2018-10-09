@@ -1,0 +1,19 @@
+{
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false,
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.fontLigatures": true,
+    "editor.wordWrap": "on",
+    "explorer.openEditors.visible": 0,
+
+    // EJS
+    "emmet.includeLanguages": {
+      "ejs": "html"
+    },
+    "files.associations": {
+      "*.ejs": "html"
+    }
+  }

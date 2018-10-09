@@ -1,0 +1,15 @@
+{
+  "name": "inventory",
+  "version": "1.0.0",
+  "description": "package system for EPS WS 2018",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Henri-Thibault Huyghe",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}
