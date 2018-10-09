@@ -23,6 +23,16 @@
 
   <main>
     REEEEEEEEEEEEEEEEEE
+    <ul>
+    <% items.forEach(item => { %>
+      <li class="card teal lighten-2 white-text">
+        <div class="card-content">
+            <span class="card-title"><%= item.name %></span>
+            <p><%= item.toString() %></p>
+        </div>
+      </li>
+    <% }) %>
+    </ul>
     <div class="t" style="height:120vh;"></div>
   </main>
 

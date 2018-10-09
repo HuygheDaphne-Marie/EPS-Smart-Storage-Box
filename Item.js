@@ -1,6 +1,6 @@
 class Item {
   constructor(UID, name, stock) {
-    this._UID= UID;
+    this._UID = UID;
     this._name = name;
     this._stock = stock;
   }
