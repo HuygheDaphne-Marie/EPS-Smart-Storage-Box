@@ -1,4 +1,24 @@
 .brand-logo {
   margin-left: 1.5rem;
 }
+
+main {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 20vw 80vw;
+      grid-template-columns: 20vw 80vw;
+}
+
+main .sidemenu {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1/2;
+  min-height: 100vh;
+}
+
+main .dashboard {
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 1;
+  grid-column: 2/3;
+}
 /*# sourceMappingURL=inventory.css.map */
