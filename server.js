@@ -5,7 +5,7 @@ const app = express();
 const Item = require('./Item');
 
 // Setup / Middleware
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -20,20 +20,25 @@ app.get('/', (req, res) => {
 
 let i1 = new Item('110U73', 'Screw 30x6mm', 25);
 let i2 = new Item('1337OT', 'Hammer', 2);
-console.log(i1.toString());
-i1.order('500bbb');
-i1.order('500');
-i1.order(500.25)
-i1.order(500)
-i1.order(0.25)
-i1.order(5.0)
-i1.order(5)
 
-console.log('\nOrdering')
 
-i1.restock('bla');
-i1.restock('500c');
-i1.restock('500');
-i1.restock(0.50);
-i1.restock(1.0);
-i1.restock(10);
+const testing = false;
+if (testing) {
+  console.log(i1.toString());
+  i1.order('500bbb');
+  i1.order('500');
+  i1.order(500.25)
+  i1.order(500)
+  i1.order(0.25)
+  i1.order(5.0)
+  i1.order(5)
+
+  console.log('\nOrdering')
+
+  i1.restock('bla');
+  i1.restock('500c');
+  i1.restock('500');
+  i1.restock(0.50);
+  i1.restock(1.0);
+  i1.restock(10);
+}
