@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 
 const Item = require('./Item');
+const Request = require('./Request');
 
 // Setup / Middleware
 app.use(express.static(path.join(__dirname, 'public')));
@@ -41,4 +42,12 @@ if (testing) {
   i1.restock(0.50);
   i1.restock(1.0);
   i1.restock(10);
+
+  console.log(i1 instanceof Item)
+  const r1 = new Request('REEE')
+  console.log(r1.orderer)
+  r1.addToOrder(i1, 15);
+  console.log(r1.items)
 }
+
+
