@@ -25,29 +25,35 @@ let i2 = new Item('1337OT', 'Hammer', 2);
 
 const testing = false;
 if (testing) {
-  console.log(i1.toString());
-  i1.order('500bbb');
-  i1.order('500');
-  i1.order(500.25)
-  i1.order(500)
-  i1.order(0.25)
-  i1.order(5.0)
-  i1.order(5)
+  // console.log(i1.toString());
+  // i1.order('500bbb');
+  // i1.order('500');
+  // i1.order(500.25)
+  // i1.order(500)
+  // i1.order(0.25)
+  // i1.order(5.0)
+  // i1.order(5)
 
-  console.log('\nOrdering')
+  // console.log('\nOrdering')
 
-  i1.restock('bla');
-  i1.restock('500c');
-  i1.restock('500');
-  i1.restock(0.50);
-  i1.restock(1.0);
-  i1.restock(10);
+  // i1.restock('bla');
+  // i1.restock('500c');
+  // i1.restock('500');
+  // i1.restock(0.50);
+  // i1.restock(1.0);
+  // i1.restock(10);
 
-  console.log(i1 instanceof Item)
   const r1 = new Request('REEE')
-  console.log(r1.orderer)
   r1.addToOrder(i1, 15);
-  console.log(r1.items)
+  r1.addToOrder(i2, 5);
+  console.log(r1.items);
+  r1.removeFromOrder(i1, 2);
+  r1.removeFromOrder(i2, 2);
+  console.log('\n', r1.items);
+  r1.removeFromOrder(i1, 20);
+  console.log('\n', r1.items);
+  r1.addToOrder(i2, 20);
+  console.log('\n', r1.items);
 }
 
 
