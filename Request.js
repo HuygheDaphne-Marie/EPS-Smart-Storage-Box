@@ -20,43 +20,37 @@ class Request {
     console.log('Not allowed for now..');
   }
 
+  _findItemOrder(item) {
+    let itemFound = null;
+    this.items.find(itemOrder => {
+      if(itemOrder.item === item) { itemFound = itemOrder };
+    });
+    return itemFound;
+  }
+
   addToOrder(item, amount) {
     if(item instanceof Item && amount > 0) {
-      let found = false;
-      this._items.forEach(itemOrder => {
-        if(itemOrder.item.UID === item.UID) {
-          found = true;
-          itemOrder.amount += amount;
-        }
-      });
-
-      if(!found) {
-        this._items.push({item, amount});
+      const itemAlreadyInOrder = this._findItemOrder(item);
+      if(itemAlreadyInOrder !== null) {
+        itemAlreadyInOrder.amount += amount;
+      } else {
+        this.items.push({item, amount});
       }
     }
   }
 
   removeFromOrder(item, amount) {
-    // item IS an Item, amount is eighter nothing or a positive whole number
     if(item instanceof Item && amount === undefined || typeof amount === "number" && amount > 0 && amount % 1 == 0) {
-      for(let idx = 0; idx < this._items.length; idx++) {
-        let itemOrder = this._items[idx];
-        if(itemOrder.item.UID === item.UID) {
-          if(amount === undefined) {
-            this._items.splice(this._items.indexOf(itemOrder), 1);
-          } else {
-            if(itemOrder.amount - amount <= 0) {
-              this._items.splice(this._items.indexOf(itemOrder), 1);
-            } else {
-              itemOrder.amount -= amount;
-            }
-          }
+      const itemToChange = this._findItemOrder(item);
+      if(itemToChange !== null) {
+        if(amount === undefined || itemToChange.amount - amount <= 0) {
+          this._items.splice(this._items.indexOf(itemToChange), 1);
+        } else {
+          itemToChange.amount -= amount;
         }
-      }  
+      }
     }
   }
-
-
 }
 
 module.exports = Request;

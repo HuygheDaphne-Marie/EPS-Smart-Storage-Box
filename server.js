@@ -46,14 +46,18 @@ if (testing) {
   const r1 = new Request('REEE')
   r1.addToOrder(i1, 15);
   r1.addToOrder(i2, 5);
-  console.log(r1.items);
-  r1.removeFromOrder(i1, 2);
-  r1.removeFromOrder(i2, 2);
-  console.log('\n', r1.items);
-  r1.removeFromOrder(i1, 20);
-  console.log('\n', r1.items);
-  r1.addToOrder(i2, 20);
-  console.log('\n', r1.items);
+  // console.log(r1.items);
+  // r1.removeFromOrder(i1, 2);
+  // r1.removeFromOrder(i2, 2);
+  // console.log('\n', r1.items);
+  // r1.removeFromOrder(i1, 20);
+  // console.log('\n', r1.items);
+  // r1.addToOrder(i2, 20);
+  // console.log('\n', r1.items);
+
+  // let item = r1._findItemOrder(i2)
+  // item.amount += 500
+  // console.log(r1.items)
 }
 
 
