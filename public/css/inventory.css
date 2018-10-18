@@ -21,4 +21,47 @@ main .dashboard {
   -ms-grid-column-span: 1;
   grid-column: 2/3;
 }
+
+main .dashboard .item-list {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 9fr;
+      grid-template-columns: 1fr 9fr;
+  -webkit-column-gap: 1rem;
+          column-gap: 1rem;
+  row-gap: 1rem;
+  margin-top: 1rem;
+}
+
+main .dashboard .item-list .card {
+  margin: 0;
+}
+
+main .dashboard .item-list .list-add {
+  visibility: hidden;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+}
+
+main .dashboard .item-list .list-add.active {
+  visibility: visible;
+}
+
+main .dashboard #requestList {
+  visibility: hidden;
+  position: absolute;
+  bottom: 5rem;
+  right: 5rem;
+  width: 400px;
+  min-height: 43px;
+  border-radius: 1rem;
+}
+
+main .dashboard #requestList.active {
+  visibility: visible;
+}
 /*# sourceMappingURL=inventory.css.map */

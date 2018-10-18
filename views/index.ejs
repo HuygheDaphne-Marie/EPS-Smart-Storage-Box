@@ -10,25 +10,17 @@
   <title>Inventory</title>
 </head>
 <body>
-  
-  <!-- <header>
-    <div class="navbar-fixed">
-      <nav>
-        <div class="nav-wrapper teal lighten-2">
-          <a href="#" class="brand-logo">Inventory</a>
-        </div>
-      </nav>
-    </div>
-  </header> -->
 
   <main>
     <aside class="sidemenu teal lighten-2 white-text">
       <h1 style="text-align:center; font-size:1.8rem;">Inventory</h1>
+      <button id="rTest">Request Test</button>
     </aside>
     <section class="dashboard">
-      <ul class="container">
+      <ul class="container item-list">
         <% items.forEach(item => { %>
-          <li class="card teal lighten-2 white-text">
+          <button class="btn btn-large list-add" data-UID="<%= item.UID %>">+</button>
+          <li class="card teal lighten-2 white-text item">
             <div class="card-content">
               <span class="card-title"><%= item.name %></span>
               <p><%= item.toString() %></p>
@@ -36,6 +28,11 @@
           </li>
         <% }) %>
       </ul>  
+
+      <div id="requestList" class="collection">
+        
+      </div>
+
     </section>
   </main>
 
