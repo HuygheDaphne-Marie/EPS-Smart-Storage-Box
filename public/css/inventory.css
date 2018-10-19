@@ -1,3 +1,7 @@
+main .dashboard {
+  padding: 2rem;
+}
+
 main .dashboard .item-list {
   display: -ms-grid;
   display: grid;

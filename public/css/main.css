@@ -5,7 +5,12 @@ main {
       grid-template-columns: 20vw 80vw;
 }
 
-main a {
+main h1 {
+  text-align: center;
+  font-size: 1.8rem;
+}
+
+main h1 a {
   color: white;
 }
 

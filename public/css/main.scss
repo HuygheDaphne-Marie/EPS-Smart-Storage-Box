@@ -2,8 +2,13 @@ main {
   display: grid;
   grid-template-columns: 20vw 80vw;
 
-  a {
-    color: white;
+  h1 {
+    text-align:center; 
+    font-size:1.8rem;
+
+    a {
+      color: white;
+    }
   }
 
   .sidemenu {
