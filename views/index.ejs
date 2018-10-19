@@ -14,7 +14,7 @@
   <main>
     <aside class="sidemenu teal lighten-2 white-text">
       <h1 style="text-align:center; font-size:1.8rem;">Inventory</h1>
-      <button id="rTest">Request Test</button>
+      <button id="rTest" class="btn btn-large teal">Request Test</button>
     </aside>
     <section class="dashboard">
       <ul class="container item-list">
@@ -39,6 +39,8 @@
   </main>
 
   <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script> let socket = io(); </script>
   <script type="text/javascript" src="js/inventory.js"></script>
 </body>
 </html>

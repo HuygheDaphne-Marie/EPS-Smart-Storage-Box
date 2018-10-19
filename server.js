@@ -1,6 +1,8 @@
 const path = require('path');
 const express = require('express');
 const app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 const Item = require('./Item');
 const Request = require('./Request');
@@ -10,9 +12,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+io.on('connection', socket => {
+  console.log('a user connected');
+
+  socket.on('Request-Order', requestData => {
+    console.log(JSON.parse(requestData));
+  })
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  });
+});
+
 // INIT
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server started on port ${PORT}..`));
+http.listen(3000, function(){
+  console.log(`Server started on port ${PORT}..`);
+});
 
 app.get('/', (req, res) => {
   let items = [i1, i2, new Item('OPP506', 'LEL', 280), new Item('LEET33', 'Memes', 52), new Item('KEK300', 'Frog', 82)];

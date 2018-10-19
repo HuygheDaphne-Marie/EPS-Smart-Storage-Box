@@ -4,6 +4,13 @@ const $addBtn = document.querySelectorAll('.list-add')
 
 let request = []
 
+function ToggleRequestVisibility() {
+  $addBtn.forEach(btn => {
+    btn.classList.toggle('active');
+  });
+  $list.classList.toggle('active');
+}
+
 function showRequest() {
   let HTMLstr = '';
   request.forEach(item => {
@@ -13,10 +20,11 @@ function showRequest() {
 }
 
 function submitRequest(event) {
-  console.log(request)
-  var xhr = new XMLHttpRequest();
+  socket.emit('Request-Order', JSON.stringify(request));
+  request = [];
+  showRequest();
+  ToggleRequestVisibility();
 }
-
 
 $addBtn.forEach(btn => {
   btn.addEventListener('click', event => {
@@ -29,16 +37,8 @@ $addBtn.forEach(btn => {
     } else {
       request.push({name: btn.getAttribute('data-name'), UID: btn.getAttribute('data-UID'), amount: 1})
     }
-
     showRequest();
   })
 })
 
-
-$btn.addEventListener('click', event => {
-  console.log('TRIG')
-  $addBtn.forEach(btn => {
-    btn.classList.toggle('active');
-  });
-  $list.classList.toggle('active');
-});
+$btn.addEventListener('click', ToggleRequestVisibility);
