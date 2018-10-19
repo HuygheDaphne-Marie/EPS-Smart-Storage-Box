@@ -5,12 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <% include partials/styles %>
+  <link rel="stylesheet" href="css/dashboard.css">
   <title>Dashboard</title>
 </head>
 <body>
+
   <main>
     <% include partials/sidemenu %>
+    <section class="dashboard">
+      <div id="chart"></div>
+    </section>
   </main>
+
+  <button id="gen" class="btn btn-large teal">Generate new data</button>
 
   <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
   <script src="js/dashboard.js"></script>
