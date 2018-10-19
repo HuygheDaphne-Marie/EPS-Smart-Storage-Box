@@ -9,7 +9,12 @@ function showRequest() {
   request.forEach(item => {
     HTMLstr += `<li class="collection-item">${item.name} (${item.UID}): ${item.amount}</li>`
   })
-  $list.innerHTML = HTMLstr;
+  $list.innerHTML = HTMLstr + '<li class="collection-item teal lighten-2"><button id="requestSubmit" class="btn teal" onclick="submitRequest(this)">Request</button></li>';
+}
+
+function submitRequest(event) {
+  console.log(request)
+  var xhr = new XMLHttpRequest();
 }
 
 

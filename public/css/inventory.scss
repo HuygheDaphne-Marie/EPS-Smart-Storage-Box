@@ -46,7 +46,8 @@ main {
       right: 5rem;
       width: 400px;
       min-height: 43px;
-      border-radius: 1rem;
+      border-radius: 1rem 1rem 0.5rem 0.5rem;
+      border-color: teal;
     }
     #requestList.active { visibility: visible; }
   }
