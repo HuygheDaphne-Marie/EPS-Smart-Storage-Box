@@ -7,7 +7,7 @@ let request = []
 function showRequest() {
   let HTMLstr = '';
   request.forEach(item => {
-    HTMLstr += `<li class="collection-item">${item.UID}: ${item.amount}</li>`
+    HTMLstr += `<li class="collection-item">${item.name} (${item.UID}): ${item.amount}</li>`
   })
   $list.innerHTML = HTMLstr;
 }
@@ -22,7 +22,7 @@ $addBtn.forEach(btn => {
     if(item !== undefined) {
       item.amount++;
     } else {
-      request.push({UID: btn.getAttribute('data-UID'), amount: 1})
+      request.push({name: btn.getAttribute('data-name'), UID: btn.getAttribute('data-UID'), amount: 1})
     }
 
     showRequest();

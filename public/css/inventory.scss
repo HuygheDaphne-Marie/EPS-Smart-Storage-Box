@@ -17,7 +17,7 @@ main {
 
     .item-list {
       display: grid;
-      grid-template-columns: 1fr 9fr;
+      grid-template-columns: 1fr 9fr 1fr 9fr;
       column-gap: 1rem;
       row-gap: 1rem;
       margin-top: 1rem;
