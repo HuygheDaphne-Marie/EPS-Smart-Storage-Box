@@ -20,11 +20,26 @@ function showRequest() {
 }
 
 function submitRequest(event) {
-  socket.emit('Request-Order', JSON.stringify(request));
+  socket.emit('request-order', JSON.stringify(request));
   request = [];
   showRequest();
   ToggleRequestVisibility();
 }
+
+socket.on('item-update', itemData => {
+  console.log(itemData)
+  itemData.completed.forEach(item => {
+    document.querySelector(`#${item._UID} p`).innerHTML = `${item._name} (${item._UID}) has ${item._stock} units in stock`
+    if(item._stock === 0) {
+      const card = document.querySelector(`#${item._UID}`);
+      card.classList.toggle('teal');
+      card.classList.toggle('red')
+    }
+  })
+  itemData.failed.forEach(fail => {
+    M.toast({html: `Request for ${fail.item._name} failed, ${fail.err}`})
+  })
+})
 
 $addBtn.forEach(btn => {
   btn.addEventListener('click', event => {

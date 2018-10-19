@@ -20,7 +20,7 @@
       <ul class="container item-list">
         <% items.forEach(item => { %>
           <button class="btn btn-large list-add" data-UID="<%= item.UID %>" data-name="<%= item.name %>">+</button>
-          <li class="card teal lighten-2 white-text item">
+          <li id="<%= item.UID %>" class="card teal lighten-2 white-text item">
             <div class="card-content">
               <span class="card-title"><%= item.name %></span>
               <p><%= item.toString() %></p>

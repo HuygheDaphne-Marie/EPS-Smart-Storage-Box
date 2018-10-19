@@ -10,6 +10,9 @@ main {
   .sidemenu {
     grid-column: 1/2;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 2rem 0.5rem 2rem;
   }
   
   .dashboard {
