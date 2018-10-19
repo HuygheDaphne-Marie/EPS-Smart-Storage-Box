@@ -38,4 +38,7 @@ app.get('/', (req, res) => {
   let items = Inventory.items;
   res.render('index', {items});
 });
+app.get('/dashboard', (req, res) => {
+  res.render('dashboard');
+});
 

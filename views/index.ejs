@@ -4,18 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="css/materialize.css" media="screen,projection">
+  <% include partials/styles %>
   <link rel="stylesheet" href="css/inventory.css">
   <title>Inventory</title>
 </head>
 <body>
 
   <main>
-    <aside class="sidemenu teal lighten-2 white-text">
-      <h1 style="text-align:center; font-size:1.8rem;">Inventory</h1>
-      <button id="rTest" class="btn btn-large teal">Request Test</button>
-    </aside>
+    <% include partials/sidemenu %>
     <section class="dashboard">
       <ul class="container item-list">
         <% items.forEach(item => { %>
@@ -29,6 +25,7 @@
         <% }) %>
       </ul>  
 
+      <button id="rTest" class="btn btn-large teal active">Request Test</button>
       <ul id="requestList" class="collection">
         <li class="collection-item teal lighten-2">
           <button id="requestSubmit" class="btn teal" onclick="submitRequest(this)">Request</button>

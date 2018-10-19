@@ -1,23 +1,5 @@
-.brand-logo {
-  margin-left: 1.5rem;
-}
-
-
-main {
-  display: grid;
-  grid-template-columns: 20vw 80vw;
-
-  .sidemenu {
-    grid-column: 1/2;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    padding: 0.5rem 2rem 0.5rem 2rem;
-  }
-  
+main {  
   .dashboard {
-    grid-column: 2/3;
-
     .item-list {
       display: grid;
       grid-template-columns: 1fr 9fr 1fr 9fr;
@@ -37,6 +19,16 @@ main {
         align-self: center;
       }
       .list-add.active { visibility: visible; }
+    }
+
+    #rTest.active {
+      visibility: visible;
+    }
+    #rTest {
+      visibility: hidden; 
+      position: absolute;
+      bottom: 5rem;
+      right: 5rem;
     }
     
     #requestList{ 

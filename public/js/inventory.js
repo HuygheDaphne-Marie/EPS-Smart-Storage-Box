@@ -5,6 +5,7 @@ const $addBtn = document.querySelectorAll('.list-add')
 let request = []
 
 function ToggleRequestVisibility() {
+  $btn.classList.toggle('active');
   $addBtn.forEach(btn => {
     btn.classList.toggle('active');
   });
