@@ -6,10 +6,10 @@ let c3Data = [];
 const options = {
   chart: {
     type: 'bar',
-    background: '#f4f4f4',
-    foreColor: '#333',
+    // background: '#f4f4f4',
+    // foreColor: '#333',
     height: 350,
-    // width: '69%'
+    width: '100%'
   },
   series: [{
     name: 'Number',
@@ -42,8 +42,8 @@ const options = {
 const options1 = {
   chart: {
     type: 'radialBar',
-    background: '#f4f4f4',
-    foreColor: '#333',
+    // background: '#f4f4f4',
+    // foreColor: '#333',
     height: 350
   },
   series: [44, 55, 67, 83],
@@ -62,12 +62,15 @@ const options1 = {
 const options2 = {
   chart: {
     type: 'donut',
-    background: '#f4f4f4',
-    foreColor: '#333',
+    // background: '#f4f4f4',
+    // foreColor: '#333',
     height: 350
   },
   series: [44, 25, 49],
   labels: ['Apples', 'Oranges', 'Bananas'],
+  legend: {
+    show: false
+  },
   dataLabels: {
     enabled: false
   }
@@ -75,9 +78,10 @@ const options2 = {
 const options3 = {
   chart: {
     type: 'bar',
-    background: '#f4f4f4',
-    foreColor: '#333',
-    height: 350
+    // background: '#f4f4f4',
+    // foreColor: '#333',
+    height: 350,
+    // width: '100%'
   },
   series: [{
     name: 'Number',
@@ -108,11 +112,68 @@ const options3 = {
   }
 };
 
+const heatOptions = {
+  chart: {
+    type: 'heatmap',
+    height: 350
+  },
+  dataLabels: {
+    enabled: false
+  },
+  series: [{
+    name: 'Monday',
+    data: genData(24, {max: 100, min: 1})
+  },
+  {
+    name: 'Tuesday',
+    data: genData(24, {max: 100, min: 1})
+  },
+  {
+    name: 'Wednesday',
+    data: genData(24, {max: 100, min: 1})
+  },
+  {
+    name: 'Thursday',
+    data: genData(24, {max: 100, min: 1})
+  },
+  {
+    name: 'Friday',
+    data: genData(24, {max: 100, min: 1})
+  },
+  {
+    name: 'Saturday',
+    data: genData(24, {max: 100, min: 1})
+  },
+  {
+    name: 'Sunday',
+    data: genData(24, {max: 100, min: 1})
+  }
+],
+xaxis: {
+  type: 'category',
+},
+title: {
+  text: 'Weekly Usage'
+}
+}
+
 // Init chart
 const chart = new ApexCharts(document.querySelector('#chart'), options);
 const c1 = new ApexCharts(document.querySelector('#c1'), options1);
 const c2 = new ApexCharts(document.querySelector('#c2'), options2);
 const c3 = new ApexCharts(document.querySelector('#c3'), options3);
+const heat = new ApexCharts(document.querySelector('#heat'), heatOptions);
+
+function genData(count, options) {
+  let series = [];
+  for(let i = 0; i < count; i++) {
+    series.push({
+      x: (i < 9) ? `0${i+1}:00` : `${i+1}:00`,
+      y: Math.floor(Math.random() * (options.max - options.min + 1)) + options.min
+    })
+  }
+  return series;
+}
 
 function generateRandomNum() {
   return Math.floor(Math.random()*100+1)
@@ -148,3 +209,4 @@ chart.render();
 c1.render();
 c2.render();
 c3.render();
+heat.render();
