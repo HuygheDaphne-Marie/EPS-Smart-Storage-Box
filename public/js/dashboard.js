@@ -190,6 +190,36 @@ $btn.addEventListener('click', event => {
   for(let idx = 0; idx < 15; idx++) {
     newData.push(generateRandomNum());
   }
+  heat.updateSeries([
+    {
+      name: 'Monday',
+      data: genData(24, {max: 100, min: 1})
+    },
+    {
+      name: 'Tuesday',
+      data: genData(24, {max: 100, min: 1})
+    },
+    {
+      name: 'Wednesday',
+      data: genData(24, {max: 100, min: 1})
+    },
+    {
+      name: 'Thursday',
+      data: genData(24, {max: 100, min: 1})
+    },
+    {
+      name: 'Friday',
+      data: genData(24, {max: 100, min: 1})
+    },
+    {
+      name: 'Saturday',
+      data: genData(24, {max: 100, min: 1})
+    },
+    {
+      name: 'Sunday',
+      data: genData(24, {max: 100, min: 1})
+    }
+  ])
   chart.updateSeries([{
     name: 'Number',
     data: newData
