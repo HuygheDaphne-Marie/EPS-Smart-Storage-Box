@@ -12,6 +12,8 @@
   "dependencies": {
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "scramjet": "^4.18.14",
+    "serialport": "^7.0.2",
     "socket.io": "^2.1.1"
   }
 }

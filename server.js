@@ -1,10 +1,13 @@
 const path = require('path');
 const express = require('express');
 const app = express();
-var http = require('http').Server(app);
-var io = require('socket.io')(http);
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
 
-const Inventory = require('./InventoryManger')
+const Inventory = require('./InventoryManger');
+const SerialComms = require('./SerialComms');
+
+const serial = new SerialComms(process.argv[2])
 
 // Setup / Middleware
 app.use(express.static(path.join(__dirname, 'public')));
