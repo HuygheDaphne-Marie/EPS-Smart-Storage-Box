@@ -6,7 +6,6 @@ const io = require('socket.io')(http);
 
 const Inventory = require('./InventoryManger');
 const SerialComms = require('./SerialComms');
-
 const serial = new SerialComms(process.argv[2])
 
 // Setup / Middleware
@@ -30,6 +29,8 @@ io.on('connection', socket => {
     console.log('user disconnected');
   });
 });
+
+serial.on('message', data => console.log('GOT:', data));
 
 // INIT
 const PORT = process.env.PORT || 5000;

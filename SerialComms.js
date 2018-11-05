@@ -1,12 +1,15 @@
 const SerialPort = require('serialport');
 const Ready = require('@serialport/parser-ready')
 const {StringStream} = require('scramjet');
+const EventEmitter = require('events');
 
 // Need sleep to wait for serial ready
 const sleep = (ms) => {return new Promise(resolve => setTimeout(resolve, ms))};
 
-class SerialComms {
+
+class SerialComms extends EventEmitter {
   constructor(portname) {
+    super();
     // Init the port
     let _ready = false;
     const port = new SerialPort(portname, {baudRate: 9600}); // Is there a way to make portname (1st param) dynamic??
@@ -24,7 +27,8 @@ class SerialComms {
   }
 
   receive(data) {
-    console.log('Received:', data);
+    // console.log('Received:', data);
+    this.emit('message', data)
     // Take message & make proper json out of it
     // send message to correct receiver
   }
