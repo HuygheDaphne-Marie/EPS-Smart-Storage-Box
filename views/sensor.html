@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="css/materialize.css" media="screen,projection">
+  <title>Document</title>
+</head>
+<body>
+  <main>
+      <h1>Sensor readout</h1>
+      <p id="current"></p>
+      <p id="high"></p>
+      <p id="low"></p>
+      <p id="avg"></p>
+  </main>
+
+  <script type="text/javascript" src="js/materialize.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    let socket = io();
+    const $current = document.getElementById('current');
+    const $high = document.getElementById('high');
+    const $low = document.getElementById('low');
+    const $avg = document.getElementById('avg');
+
+    let high = 0;
+    let low = 0;
+    let avg = 0;
+    let sum = 0;
+    let amount = 0;
+
+    socket.on('sensor-update', value => {
+      value = parseInt(value)
+      if(value > high) {
+        high = value;
+      }
+      if(low == 0 || value < low) {
+        low = value;
+      }
+
+      amount += 1;
+      sum += value;
+      avg = sum/amount;
+
+      $current.innerHTML = `Current: ${value}`;
+      $high.innerHTML = `All time high: ${high}`;
+      $low.innerHTML = `All time low: ${low}`;
+      $avg.innerHTML = `Average: ${avg}`;
+    })
+
+    let lightOn = false;
+    setInterval(() => {
+      socket.emit('led', lightOn);
+      lightOn = !lightOn;
+    }, 5000)
+  </script>
+</body>
+</html>

@@ -18,11 +18,16 @@ io.on('connection', socket => {
 
   socket.on('request-order', requestData => {
     let req = JSON.parse(requestData);
-    console.log(req)
     const completedOrders = Inventory.RequestItems(req);
-
-    // send new item data to client
     socket.emit('item-update', completedOrders);
+  })
+
+  socket.on('led', lightOn => {
+    if(lightOn) {
+      serial.write('0');
+    } else {
+      serial.write('1');
+    }
   })
 
   socket.on('disconnect', () => {
@@ -30,7 +35,13 @@ io.on('connection', socket => {
   });
 });
 
-serial.on('message', data => console.log('GOT:', data));
+serial.on('message', data => {
+  if(data.type === "particle") {
+    io.emit('sensor-update', data.value);
+  } else {
+    console.log('Uncatagorized message:', data)
+  }
+});
 
 // INIT
 const PORT = process.env.PORT || 5000;
@@ -45,4 +56,7 @@ app.get('/', (req, res) => {
 app.get('/dashboard', (req, res) => {
   res.render('dashboard');
 });
+app.get('/sensor', (req, res) => {
+  res.sendFile(path.join(__dirname, 'views/sensor.html'))
+})
 
