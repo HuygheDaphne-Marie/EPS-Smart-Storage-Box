@@ -15,6 +15,11 @@
       <p id="high"></p>
       <p id="low"></p>
       <p id="avg"></p>
+      <h2 id="percent"></h2>
+      <button id="zero" class="btn">Zero Sensor</button>
+      <button id="zerohigh" class="btn">Zero High</button>
+      <button id="disco" class="btn">Disco Toggle</button>
+      <button id="reset" class="btn red">RESET</button>
   </main>
 
   <script type="text/javascript" src="js/materialize.min.js"></script>
@@ -25,12 +30,47 @@
     const $high = document.getElementById('high');
     const $low = document.getElementById('low');
     const $avg = document.getElementById('avg');
+    const $reset = document.getElementById('reset').addEventListener('click', e => {
+      high = 0;
+      low = 0;
+      avg = 0;
+      sum = 0;
+      amount = 0;
+      $current.innerHTML = `Current: ${0}`;
+      $high.innerHTML = `All time high: ${high}`;
+      $low.innerHTML = `All time low: ${low}`;
+      $avg.innerHTML = `Average: ${avg}`;
+    });
+    let disco = false;
+    const $disco = document.getElementById('disco').addEventListener('click', e => {
+      disco = !disco;
+      socket.emit('disco', disco);
+      });
 
     let high = 0;
     let low = 0;
     let avg = 0;
     let sum = 0;
     let amount = 0;
+
+
+    $percent = document.getElementById('percent')
+
+    $zerohigh = document.getElementById('zerohigh').addEventListener('click', e => {zerohigh = true})
+    let zero = false;
+    let zerolow;
+    let zerohigh;
+    const $zero = document.getElementById('zero').addEventListener('click', e => {
+      zero = true;
+      zerolow = low;
+    });
+    const scale = (num, in_min, in_max, out_min, out_max) => {
+      return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    }
+
+
+
+
 
     socket.on('sensor-update', value => {
       value = parseInt(value)
@@ -39,6 +79,16 @@
       }
       if(low == 0 || value < low) {
         low = value;
+      }
+      if(zerohigh === true) {
+        zerohigh = value;
+      }
+      if(zero) {
+        let weight = (Math.round(scale(value, zerolow, zerohigh, 0, 100)) < 0) ? 0 : Math.round(scale(value, zerolow, zerohigh, 0, 100));
+        let fullness = (100-weight < 0) ? 'Empty' : (100-weight)+"%";
+        $percent.innerHTML = fullness;
+        // send fullness to server..
+        socket.emit('fullness', 100-weight);
       }
 
       amount += 1;
@@ -49,13 +99,14 @@
       $high.innerHTML = `All time high: ${high}`;
       $low.innerHTML = `All time low: ${low}`;
       $avg.innerHTML = `Average: ${avg}`;
+      console.log(amount)
     })
 
-    let lightOn = false;
-    setInterval(() => {
-      socket.emit('led', lightOn);
-      lightOn = !lightOn;
-    }, 5000)
+    // let lightOn = false;
+    // setInterval(() => {
+    //   socket.emit('led', lightOn);
+    //   lightOn = !lightOn;
+    // }, 5000)
   </script>
 </body>
 </html>

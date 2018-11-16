@@ -30,13 +30,17 @@ io.on('connection', socket => {
     }
   })
 
+  socket.on('fullness', percent => {
+    serial.write(percent+'');
+  })
+
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
 });
 
 serial.on('message', data => {
-  if(data.type === "particle") {
+  if(data.type === "sensor") {
     io.emit('sensor-update', data.value);
   } else {
     console.log('Uncatagorized message:', data)
