@@ -6,7 +6,7 @@ const io = require('socket.io')(http);
 
 const Inventory = require('./InventoryManger');
 const SerialComms = require('./SerialComms');
-const serial = new SerialComms(process.argv[2])
+const serial = new SerialComms('./', process.argv[2]);
 
 // Setup / Middleware
 app.use(express.static(path.join(__dirname, 'public')));
@@ -20,7 +20,7 @@ io.on('connection', socket => {
     let req = JSON.parse(requestData);
     const completedOrders = Inventory.RequestItems(req);
     socket.emit('item-update', completedOrders);
-  })
+  });
 
   socket.on('led', lightOn => {
     if(lightOn) {
@@ -28,11 +28,11 @@ io.on('connection', socket => {
     } else {
       serial.write('1');
     }
-  })
+  });
 
   socket.on('fullness', percent => {
     serial.write(percent+'');
-  })
+  });
 
   socket.on('disconnect', () => {
     console.log('user disconnected');
@@ -62,5 +62,5 @@ app.get('/dashboard', (req, res) => {
 });
 app.get('/sensor', (req, res) => {
   res.sendFile(path.join(__dirname, 'views/sensor.html'))
-})
+});
 
