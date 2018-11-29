@@ -33,11 +33,10 @@ class SerialComms extends EventEmitter {
         message = data[0];
       }
     } else {
-      message =  original
-      // {
-      //   type: data[0],
-      //   value: data[1]
-      // }
+      message = {
+        type: data[0],
+        value: data[1]
+      }
     }
     
     this.emit('message', message)
