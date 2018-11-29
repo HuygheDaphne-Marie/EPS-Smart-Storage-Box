@@ -62,7 +62,7 @@
     let zerohigh;
     const $zero = document.getElementById('zero').addEventListener('click', e => {
       zero = true;
-      zerolow = low;
+      zerolow = true;
     });
     const scale = (num, in_min, in_max, out_min, out_max) => {
       return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
@@ -80,15 +80,24 @@
       if(low == 0 || value < low) {
         low = value;
       }
+      if(zerolow === true) {
+        zerolow = value;
+      }
       if(zerohigh === true) {
         zerohigh = value;
       }
       if(zero) {
-        let weight = (Math.round(scale(value, zerolow, zerohigh, 0, 100)) < 0) ? 0 : Math.round(scale(value, zerolow, zerohigh, 0, 100));
-        let fullness = (100-weight < 0) ? 'Empty' : (100-weight)+"%";
+        let weight = Math.round(scale(value, zerolow, zerohigh, 0, 100));
+        if(weight > 100) {
+          weight = 100;
+        }
+        if(weight < 0) {
+          weight = 0;
+        }
+        let fullness = (value < zerolow-10000) ? 'Empty' : (weight)+"%";
         $percent.innerHTML = fullness;
         // send fullness to server..
-        socket.emit('fullness', 100-weight);
+        socket.emit('fullness', weight);
       }
 
       amount += 1;

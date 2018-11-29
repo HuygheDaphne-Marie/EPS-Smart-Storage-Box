@@ -16,7 +16,6 @@ class SerialComms extends EventEmitter {
   write(data) {
     if(this._ready) {
       this.port.write(data)
-      console.log('WRITTEN:', data)
     }
   }
 

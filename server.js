@@ -31,6 +31,7 @@ io.on('connection', socket => {
   })
 
   socket.on('fullness', percent => {
+    
     serial.write(percent+'');
   })
 
