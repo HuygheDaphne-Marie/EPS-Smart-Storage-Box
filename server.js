@@ -6,7 +6,11 @@ const io = require('socket.io')(http);
 
 const Inventory = require('./InventoryManger');
 const SerialComms = require('./SerialComms');
+const Box = require('./Box');
+const Frame = require('./Frame');
 const serial = new SerialComms(process.argv[2])
+
+const frame = new Frame();
 
 // Setup / Middleware
 app.use(express.static(path.join(__dirname, 'public')));
