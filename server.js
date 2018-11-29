@@ -8,9 +8,15 @@ const Inventory = require('./InventoryManger');
 const SerialComms = require('./SerialComms');
 const Box = require('./Box');
 const Frame = require('./Frame');
-const serial = new SerialComms(process.argv[2])
+const serial = new SerialComms(process.argv[2]) 
 
 const frame = new Frame();
+const box1 = new Box(Inventory.items[0]);
+const box2 = new Box(Inventory.items[1]);
+const box3 = new Box(Inventory.items[2]);
+frame.addBox(box1);
+frame.addBox(box2);
+frame.addBox(box3);
 
 // Setup / Middleware
 app.use(express.static(path.join(__dirname, 'public')));
@@ -35,8 +41,7 @@ io.on('connection', socket => {
   })
 
   socket.on('fullness', percent => {
-    
-    serial.write(percent+'');
+    serial.write(`${percent}`);
   })
 
   socket.on('disconnect', () => {
