@@ -43,7 +43,7 @@ serial.on('message', data => {
   if(data.type === "sensor") {
     io.emit('sensor-update', data.value);
   } else {
-    console.log('Uncatagorized message:', data)
+    console.log('Uncategorized message:', data)
   }
 });
 
@@ -59,6 +59,9 @@ app.get('/', (req, res) => {
 });
 app.get('/dashboard', (req, res) => {
   res.render('dashboard');
+});
+app.get('/assembly', (req, res) => {
+    res.render('assembly');
 });
 app.get('/sensor', (req, res) => {
   res.sendFile(path.join(__dirname, 'views/sensor.html'))
