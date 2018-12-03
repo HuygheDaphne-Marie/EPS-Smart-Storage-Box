@@ -18,6 +18,10 @@ frame.addBox(box1);
 frame.addBox(box2);
 frame.addBox(box3);
 
+serial.write('serial check');
+frame.boxes[0].serial.write('this is box 0');
+frame.boxes[1].serial.write('this is box 1');
+
 console.log(frame.boxes.length)
 frame.removeBox(1)
 console.log(frame.boxes.length)

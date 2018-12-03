@@ -3,6 +3,8 @@ const Ready = require('@serialport/parser-ready')
 const {StringStream} = require('scramjet');
 const EventEmitter = require('events');
 
+const sleep = (ms) => {return new Promise(resolve => setTimeout(resolve, ms));};
+
 class SerialComms extends EventEmitter {
   constructor(portname) {
     super();
@@ -13,14 +15,16 @@ class SerialComms extends EventEmitter {
     this.reader = this.port.pipe(new StringStream).lines('\n').each(data => this.receive(data));
   }
 
-  write(data) {
+  async write(data) {
     if(this._ready) {
-      this.port.write(data)
+      this.port.write(data);
+    } else {
+      await sleep(1000);
+      this.write(data);
     }
   }
 
   receive(data) {
-    let original = data
     data = data.split(':').map(elem => elem.replace('\r', ''))
     let message;
     if(data.length === 1) {
