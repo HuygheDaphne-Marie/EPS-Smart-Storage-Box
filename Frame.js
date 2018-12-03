@@ -12,6 +12,10 @@ class Frame {
       throw "Frame boxes must be of the class Box!";
     }
   }
+
+  removeBox(index) {
+    this.boxes.splice(index, 1);
+  }
 }
 
 module.exports = Frame;

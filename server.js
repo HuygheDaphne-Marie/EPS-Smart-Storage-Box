@@ -11,12 +11,16 @@ const Frame = require('./Frame');
 const serial = new SerialComms(process.argv[2]) 
 
 const frame = new Frame();
-const box1 = new Box(Inventory.items[0]);
-const box2 = new Box(Inventory.items[1]);
-const box3 = new Box(Inventory.items[2]);
+const box1 = new Box(Inventory.items[0], serial);
+const box2 = new Box(Inventory.items[1], serial);
+const box3 = new Box(Inventory.items[2], serial);
 frame.addBox(box1);
 frame.addBox(box2);
 frame.addBox(box3);
+
+console.log(frame.boxes.length)
+frame.removeBox(1)
+console.log(frame.boxes.length)
 
 // Setup / Middleware
 app.use(express.static(path.join(__dirname, 'public')));

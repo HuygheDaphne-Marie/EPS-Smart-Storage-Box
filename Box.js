@@ -1,10 +1,9 @@
 const Item = require('./Item');
-const SerialComms = require('./SerialComms');
 
 class Box {
-  constructor(Item) {
+  constructor(Item, serial) {
     this.itemHeld = Item;
-    this.serial = new SerialComms(process.argv[2]);
+    this.serial = serial;
   }
 
   switchItem(newItem) {
