@@ -15,7 +15,7 @@
     <section class="dashboard">
         <ul class="item-list">
             <% items.forEach(item => { %>
-                <button class="btn btn-large list-add z-depth-2" data-UID="<%= item.UID %>"
+                <button class="btn btn-large blue-grey darken-1 list-add z-depth-2" data-UID="<%= item.UID %>"
                         data-name="<%= item.name %>"><i class="large material-icons">add</i></button>
                 <li id="<%= item.UID %>" class="card grey lighten-2 black-text item">
                     <div class="card-content">
@@ -26,12 +26,12 @@
             <% }) %>
         </ul>
 
-        <button id="rTest" class="btn btn-large teal active"><i class="large material-icons"
-                                                                style="padding-right: 10px;">inbox</i>order new parts
+        <button id="rTest" class="btn btn-large blue-grey darken-1 active">
+            <i class="large material-icons" style="padding-right: 10px;">inbox</i>order new parts
         </button>
         <ul id="requestList" class="collection">
-            <li class="collection-item teal lighten-2">
-                <button id="requestSubmit" class="btn teal" onclick="submitRequest(this)">Request</button>
+            <li class="collection-item blue-grey darken-1">
+                <button id="requestSubmit" class="btn blue-grey darken-1" onclick="submitRequest(this)">Request</button>
             </li>
         </ul>
 

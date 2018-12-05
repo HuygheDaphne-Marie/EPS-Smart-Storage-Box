@@ -7,6 +7,31 @@
     <% include partials/styles %>
     <link rel="stylesheet" href="css/inventory.css">
     <style>
+        #body {
+            width: 100%;
+            height: 100%;
+            padding: 3%;
+            background-color: #00C853;
+            margin: auto;
+        }
+
+        #btnContainer {
+            margin: auto;
+            bottom: 10%;
+            width: 100%;
+        }
+
+        #btnContainer > div {
+            float: left;
+            height: 300px;
+            width: 30%;
+        }
+
+        #btnContainer > div > button {
+            height: 100px;
+            width: 200px;
+        }
+
         .smartie {
             width: 50px;
             height: 50px;
@@ -21,6 +46,7 @@
             animation-timing-function: linear;
             animation-fill-mode: forwards;
         }
+
         @keyframes mymove {
             from {
                 left: 400px;
@@ -37,36 +63,50 @@
 <main>
     <% include partials/sidemenu %>
 
-    <div style="width: 95%; height: 95%; background-color: #00C853; margin: auto;" class="grey lighten-2">
-        <h4>How it should look like:</h4>
-        <!-- <div class="yellow darken-2 smartie">
+    <div id="body" class="grey lighten-2">
+        <div>
+            <h4>How to assemble your workpiece:</h4>
         </div>
-        <div class="blue darken-2 smartie">
-        </div>
-        <div class="red darken-2 smartie">
-        </div>-->
-
 
         <div id="err-tmpl" class="hide">
             <h1>No items ordered</h1>
         </div>
 
         <div id="take-item-tmpl" class="hide">
-            <h1>Take <span class="amount">n</span> items of type <span class="type">itemtype</span> and put it somewhere else</h1>
+            <h1>Take <span class="amount">nAmount</span> <span class="type">itemtype</span> out of the blinking box.
+            </h1>
+            <h1>
+                <a class="btn-floating btn-large pulse blue darken-1 center"
+                   style="height: 100px; width: 100px;">
+                    <i class="material-icons">inbox</i>
+                </a>
+            </h1>
         </div>
 
         <div id="assembly-item-tmpl" class="hide">
-            <div class="smartieContainer"></div>
+            <h1>Place the parts as shown below!</h1>
             <br>
-            <h1>Do your thing!</h1>
+            <div class="smartieContainer"></div>
         </div>
 
         <div id="finished-tmpl" class="hide">
-            <h1>Finished</h1>
+            <h1>Great, you are finished!</h1>
+            <h1><i class="material-icons" style="font-size: 150px;">verified_user</i></h1>
         </div>
 
-        <button type="button" id="prevStep">Zurück</button>
-        <button type="button" id="nextStep">Weiter</button>
+        <div id="btnContainer">
+            <div class="left-align valign-wrapper">
+                <button type="button" class="btn blue-grey darken-1 center-block" id="prevStep">
+                    <i class="material-icons left">chevron_left</i>Back
+                </button>
+            </div>
+            <div class="right valign-wrapper">
+                <button type="button" class="btn blue-grey darken-1 center-block" id="nextStep">
+                    <i class="material-icons right">chevron_right</i>Next
+                </button>
+            </div>
+        </div>
+
     </div>
 
 </main>

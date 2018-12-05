@@ -14,6 +14,9 @@
             return;
         }
 
+
+        document.querySelector('#prevStep').classList.add('hide');
+
         document.querySelector('#nextStep').addEventListener('click', goNext);
         document.querySelector('#prevStep').addEventListener('click', goPrev);
 
@@ -25,6 +28,7 @@
     }
 
     function goNext(){
+        document.querySelector('#prevStep').classList.remove('hide');
         if(currIndex >= window.orderedItems.length * 2){
             return;
         }
@@ -32,6 +36,7 @@
     }
 
     function goPrev(){
+        document.querySelector('#nextStep').classList.remove('hide');
         if(currIndex === 0) {
             return;
         }
@@ -84,6 +89,7 @@
 
     function updateFinishTemplate(){
         finishedTemplate.classList.remove('hide');
+        document.querySelector('#nextStep').classList.add('hide');
     }
 
     function createSmartie(color){
