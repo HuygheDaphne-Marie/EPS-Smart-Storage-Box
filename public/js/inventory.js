@@ -1,8 +1,8 @@
 const $btn = document.querySelector('#rTest');
 const $list = document.querySelector('#requestList');
-const $addBtn = document.querySelectorAll('.list-add')
+const $addBtn = document.querySelectorAll('.list-add');
 
-let request = []
+let request = [];
 
 function ToggleRequestVisibility() {
   $btn.classList.toggle('active');
@@ -16,8 +16,8 @@ function showRequest() {
   let HTMLstr = '';
   request.forEach(item => {
     HTMLstr += `<li class="collection-item">${item.name} (${item.UID}): ${item.amount}</li>`
-  })
-  $list.innerHTML = HTMLstr + '<li class="collection-item teal lighten-2"><button id="requestSubmit" class="btn teal" onclick="submitRequest(this)">Request</button></li>';
+  });
+  $list.innerHTML = HTMLstr + '<li class="collection-item grey lighten-2"><button id="requestSubmit" class="btn grey" onclick="submitRequest(this)">Order</button></li>';
 }
 
 function submitRequest(event) {
@@ -33,20 +33,20 @@ socket.on('item-update', itemData => {
     document.querySelector(`#${item._UID} p`).innerHTML = `${item._name} (${item._UID}) has ${item._stock} units in stock`
     if(item._stock === 0) {
       const card = document.querySelector(`#${item._UID}`);
-      card.classList.toggle('teal');
+      card.classList.toggle('grey');
       card.classList.toggle('red')
     }
-  })
+  });
   itemData.failed.forEach(fail => {
     M.toast({html: `Request for ${fail.item._name} failed, ${fail.err}`})
   })
-})
+});
 
 $addBtn.forEach(btn => {
   btn.addEventListener('click', event => {
     const item = request.find(itemRequest => {
       return itemRequest.UID === btn.getAttribute('data-UID');
-    })
+    });
 
     if(item !== undefined) {
       item.amount++;
@@ -55,6 +55,6 @@ $addBtn.forEach(btn => {
     }
     showRequest();
   })
-})
+});
 
 $btn.addEventListener('click', ToggleRequestVisibility);

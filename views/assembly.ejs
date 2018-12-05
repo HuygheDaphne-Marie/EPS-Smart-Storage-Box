@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <% include partials/styles %>
+    <link rel="stylesheet" href="css/inventory.css">
+    <style>
+        .smartie {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            float: left;
+            border-radius: 50%;
+            position: relative;
+        }
+
+        .smartie.animated {
+            animation: mymove 1.5s ease-in-out;
+            animation-timing-function: linear;
+            animation-fill-mode: forwards;
+        }
+        @keyframes mymove {
+            from {
+                left: 400px;
+            }
+            to {
+                left: 0px;
+            }
+        }
+    </style>
+    <title>Inventory</title>
+</head>
+<body>
+
+<main>
+    <% include partials/sidemenu %>
+
+    <div style="width: 95%; height: 95%; background-color: #00C853; margin: auto;" class="grey lighten-2">
+        <h4>How it should look like:</h4>
+        <!-- <div class="yellow darken-2 smartie">
+        </div>
+        <div class="blue darken-2 smartie">
+        </div>
+        <div class="red darken-2 smartie">
+        </div>-->
+
+
+        <div id="err-tmpl" class="hide">
+            <h1>No items ordered</h1>
+        </div>
+
+        <div id="take-item-tmpl" class="hide">
+            <h1>Take <span class="amount">n</span> items of type <span class="type">itemtype</span> and put it somewhere else</h1>
+        </div>
+
+        <div id="assembly-item-tmpl" class="hide">
+            <div class="smartieContainer"></div>
+            <br>
+            <h1>Do your thing!</h1>
+        </div>
+
+        <div id="finished-tmpl" class="hide">
+            <h1>Finished</h1>
+        </div>
+
+        <button type="button" id="prevStep">Zurück</button>
+        <button type="button" id="nextStep">Weiter</button>
+    </div>
+
+</main>
+
+<% if(items.length > 0){ %>
+    <script>
+        window.orderedItems = <%- JSON.stringify(items) %>;
+    </script>
+<% } %>
+
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script> let socket = io(); </script>
+<script type="text/javascript" src="js/assembly.js"></script>
+</body>
+</html>

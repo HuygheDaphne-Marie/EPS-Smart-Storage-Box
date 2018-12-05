@@ -61,7 +61,7 @@ app.get('/dashboard', (req, res) => {
   res.render('dashboard');
 });
 app.get('/assembly', (req, res) => {
-    res.render('assembly');
+    res.render('assembly', {items:Inventory.orderedItems});
 });
 app.get('/sensor', (req, res) => {
   res.sendFile(path.join(__dirname, 'views/sensor.html'))
