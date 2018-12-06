@@ -11,6 +11,9 @@
     function init() {
         if(!window.orderedItems || window.orderedItems.length === 0) {
             errTemplate.classList.remove('hide');
+            document.querySelector('#prevStep').classList.add('hide');
+            document.querySelector('#nextStep').classList.add('hide');
+
             return;
         }
 
