@@ -10,21 +10,19 @@ const Box = require('./Box');
 const Frame = require('./Frame');
 const serial = new SerialComms(process.argv[2]) 
 
-const frame = new Frame();
-const box1 = new Box(Inventory.items[0], serial);
-const box2 = new Box(Inventory.items[1], serial);
-const box3 = new Box(Inventory.items[2], serial);
-frame.addBox(box1);
-frame.addBox(box2);
-frame.addBox(box3);
+let obj = {
+  city: "St Polten",
+  weather: {
+    state: "rain",
+    temp: 5.0
+  }
+}
 
-serial.write('serial check');
-frame.boxes[0].serial.write('this is box 0');
-frame.boxes[1].serial.write('this is box 1');
+const lel = () => {
+  serial.write(JSON.stringify(obj))
+}
 
-console.log(frame.boxes.length)
-frame.removeBox(1)
-console.log(frame.boxes.length)
+setInterval(lel, 5000)
 
 // Setup / Middleware
 app.use(express.static(path.join(__dirname, 'public')));

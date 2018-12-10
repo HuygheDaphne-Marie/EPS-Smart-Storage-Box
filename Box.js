@@ -1,9 +1,8 @@
 const Item = require('./Item');
 
 class Box {
-  constructor(Item, serial) {
+  constructor(Item) {
     this.itemHeld = Item;
-    this.serial = serial;
   }
 
   switchItem(newItem) {
