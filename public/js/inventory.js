@@ -14,8 +14,10 @@ function ToggleRequestVisibility() {
 
 function showRequest() {
   let HTMLstr = '';
+  var loopcounter = 0;
   request.forEach(item => {
-    HTMLstr += `<li class="collection-item">${item.name} (${item.UID}): ${item.amount}</li>`
+    HTMLstr += `<li id="${loopcounter}" class="collection-item">${item.name} (ID: ${item.UID}): ${item.amount}<button class="right btn-flat btn-small transparent" onclick="removeItem(${loopcounter})"><i class="material-icons blue-grey-text">cancel</i></button></li>`;
+    loopcounter++;
   });
   $list.innerHTML = HTMLstr + '<li class="collection-item grey lighten-2"><button id="requestSubmit" class="btn grey" onclick="submitRequest(this)">Order</button></li>';
 }
@@ -56,5 +58,12 @@ $addBtn.forEach(btn => {
     showRequest();
   })
 });
+
+function removeItem(count){
+    request.splice(count, 1);
+    var element = document.getElementById(count);
+    element.parentNode.removeChild(element);
+    console.log(request);
+}
 
 $btn.addEventListener('click', ToggleRequestVisibility);

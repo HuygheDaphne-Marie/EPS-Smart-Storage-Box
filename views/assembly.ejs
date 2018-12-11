@@ -41,6 +41,14 @@
             background-repeat: no-repeat;
         }
 
+        .yourOrderTube{
+            height: 75px;
+            padding: 8px 15px 0px 5px; /*top right bottom left*/
+            background-image: url("img/tube.png");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+        }
+
         .smartie {
             width: 50px;
             height: 50px;
@@ -48,6 +56,7 @@
             float: left;
             border-radius: 50%;
             position: relative;
+            transform: rotate(45deg);
         }
 
         .smartie.animated {
@@ -58,10 +67,10 @@
 
         @keyframes mymove {
             from {
-                left: 400px;
+                left: 90%;
             }
             to {
-                left: 0px;
+                left: 0%;
             }
         }
     </style>
@@ -77,9 +86,10 @@
             <h4>How to assemble your workpiece:</h4>
         </div>
 
-        <div id="#your-order-tmpl" class="hide">
+        <div id="your-order-tmpl" class="hide">
             <h1>You have ordered following Smarties:</h1>
-            <span id="yourOrder"></span>
+            <div class="yourOrderTube center-block"></div>
+
         </div>
 
         <div id="err-tmpl" class="hide">
@@ -109,13 +119,18 @@
 
         <div id="finished-tmpl" class="hide">
             <h1>Great, you are finished!</h1>
-            <h1><i class="material-icons" style="font-size: 150px;">verified_user</i></h1>
+            <h1><i class="material-icons green-text" style="font-size: 150px;">verified_user</i></h1>
         </div>
 
         <div id="btnContainer">
             <div class="left valign-wrapper">
                 <button type="button" class="btn blue-grey darken-1 center-block" id="prevStep">
                     <i class="material-icons left">chevron_left</i>Back
+                </button>
+            </div>
+            <div class="center valign-wrapper">
+                <button type="button" class="btn blue-grey darken-1 center-block" id="startAssembly">
+                    <i class="material-icons right">chevron_right</i>Start
                 </button>
             </div>
             <div class="right valign-wrapper">

@@ -17,18 +17,24 @@
 
             return;
         }
-
-
         document.querySelector('#prevStep').classList.add('hide');
-
+        document.querySelector('#nextStep').classList.add('hide');
+        document.querySelector('#startAssembly').addEventListener('click', startAssembly);
         document.querySelector('#nextStep').addEventListener('click', goNext);
         document.querySelector('#prevStep').addEventListener('click', goPrev);
 
         //for(const item of window.orderedItems){           //use just for random smartie colors
         //    item.color = '#' + Math.round(Math.random()*Math.pow(16,6)-1).toString(16).padStart(6, '0');
         //}
+        showOrderTube();
+        //applyIndex(currIndex);
+    }
 
+    function startAssembly(){
         applyIndex(currIndex);
+        updateTakeItemTemplate();
+        document.querySelector('#startAssembly').classList.add('hide');
+        document.querySelector('#nextStep').classList.remove('hide');
     }
 
     function goNext(){
@@ -50,7 +56,19 @@
         applyIndex(currIndex);
     }
 
+    function showOrderTube(){
+        yourOrderTemplate.classList.remove('hide');
+        const container = yourOrderTemplate.querySelector('.yourOrderTube');
+        for(let i = 0; i < window.orderedItems.length; i++) {
+            const smartie = document.createElement('div');
+            smartie.classList.add('smartie');
+            smartie.style.background = "radial-gradient(circle at 20% 140%, #81e8f6, dark" + window.orderedItems[i].item.color + " 5%, " + window.orderedItems[i].item.color + " 80%, white 100%)";
+            container.appendChild(smartie);
+        }
+    }
+
     function applyIndex(){
+        yourOrderTemplate.classList.add('hide');
         takePartTemplate.classList.add('hide');
         assemblyTemplate.classList.add('hide');
         finishedTemplate.classList.add('hide');
@@ -104,7 +122,7 @@
     function createSmartie(color){
         const smartie = document.createElement('div');
         smartie.classList.add('smartie');
-        smartie.style.backgroundColor = color;
+        smartie.style.background = "radial-gradient(circle at 20% 140%, #81e8f6, dark" + color + " 5%, " + color + " 80%, white 100%)";
 
         return smartie;
     }
