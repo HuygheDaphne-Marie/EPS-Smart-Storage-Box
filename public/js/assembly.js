@@ -1,6 +1,7 @@
 (function () {
     'use strict';
 
+    const yourOrderTemplate = document.querySelector('#your-order-tmpl');
     const errTemplate = document.querySelector('#err-tmpl');
     const assemblyTemplate = document.querySelector('#assembly-item-tmpl');
     const takePartTemplate = document.querySelector('#take-item-tmpl');
@@ -23,9 +24,9 @@
         document.querySelector('#nextStep').addEventListener('click', goNext);
         document.querySelector('#prevStep').addEventListener('click', goPrev);
 
-        for(const item of window.orderedItems){
-            item.color = '#' + Math.round(Math.random()*Math.pow(16,6)-1).toString(16).padStart(6, '0');
-        }
+        //for(const item of window.orderedItems){           use just for random smartie colors
+        //    item.color = '#' + Math.round(Math.random()*Math.pow(16,6)-1).toString(16).padStart(6, '0');
+        //}
 
         applyIndex(currIndex);
     }
@@ -68,7 +69,7 @@
 
         for(let i = 0; i < currIndex/2; i++){
             for(let j = 0; j < window.orderedItems[i].amount; j++){
-                const smartie = createSmartie(window.orderedItems[i].color);
+                const smartie = createSmartie(window.orderedItems[i].item.color);   //window.orderedItems[i].color for random color
 
                 if(i === Math.floor(currIndex/2)) {
                     smartie.classList.add('animated');
@@ -88,6 +89,8 @@
 
         amountEl.textContent = currItem.amount;
         typeEl.textContent = currItem.item.name;
+
+        console.log(window.orderedItems);
     }
 
     function updateFinishTemplate(){

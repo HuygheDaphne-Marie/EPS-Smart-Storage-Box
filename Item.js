@@ -1,8 +1,10 @@
 class Item {
-    constructor(UID, name, stock) {
+    constructor(UID, name, stock, color, boxID) {
         this._UID = UID;
         this._name = name;
         this._stock = stock;
+        this._color = color;
+        this._boxID = boxID;
     }
 
     get UID() {
@@ -40,7 +42,9 @@ class Item {
     toJSON() {
         return {
             name: this._name,
-            UID: this._UID
+            UID: this._UID,
+            color: this._color,
+            boxID: this._boxID
         };
     }
 

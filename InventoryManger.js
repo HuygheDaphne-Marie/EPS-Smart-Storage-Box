@@ -4,11 +4,11 @@ const Request = require('./Request');
 class InventoryManager {
   constructor() {
     this.items = [
-      new Item('R1', 'Red Smartie', 10),
-      new Item('B1', 'Blue Smartie', 10),
-      new Item('Y1', 'Yellow Smartie', 10),
-      new Item('V1', 'Violet Smartie', 10),
-      new Item('G1', 'Green Smartie', 10)
+      new Item('R1', 'Red Smartie', 10, 'red', 'b1'),
+      new Item('B1', 'Blue Smartie', 10, 'blue', 'b2'),
+      new Item('Y1', 'Yellow Smartie', 10, 'yellow', 'b3'),
+      new Item('V1', 'Violet Smartie', 10, 'violet', 'b4'),
+      new Item('G1', 'Green Smartie', 10, 'green', 'b5')
     ];
 
     this._orderedItems = [];
