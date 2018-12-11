@@ -13,23 +13,32 @@
             padding: 3%;
             background-color: #00C853;
             margin: auto;
+            overflow: hidden!important;
         }
 
         #btnContainer {
             margin: auto;
+            width: 75%;
+            position: fixed;
             bottom: 10%;
-            width: 100%;
         }
 
         #btnContainer > div {
             float: left;
-            height: 300px;
             width: 30%;
         }
 
         #btnContainer > div > button {
             height: 100px;
             width: 200px;
+        }
+
+        .smartieContainer{
+            height: 75px;
+            padding: 8px 15px 0px 5px; /*top right bottom left*/
+            background-image: url("img/tube.png");
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
         }
 
         .smartie {
@@ -74,7 +83,12 @@
         </div>
 
         <div id="err-tmpl" class="hide">
-            <h1>You don't have any items ordered, at the moment.</h1>
+            <h1><i class="material-icons" style="font-size: 150px; color: #8b1014">report_problem</i></h1>
+            <h1>Attention!<br>You don't have any items ordered, at the moment.</h1>
+            <!--<figure>
+                <img class="center-block" src="https://media1.giphy.com/media/6uGhT1O4sxpi8/giphy.gif?cid=3640f6095c0fb97e384d354759bb4fb8">
+                <figcaption class="center">Why are you like this? Go! Go and order some products!</figcaption>
+            </figure>-->
         </div>
 
         <div id="take-item-tmpl" class="hide">
@@ -83,7 +97,6 @@
             <h1>
                 <a class="btn-floating btn-large pulse blue darken-1 center"
                    style="height: 100px; width: 100px;">
-                    <i class="material-icons">inbox</i>
                 </a>
             </h1>
         </div>
@@ -91,7 +104,7 @@
         <div id="assembly-item-tmpl" class="hide">
             <h1>Place the parts as shown below!</h1>
             <br>
-            <div class="smartieContainer"></div>
+            <div class="smartieContainer center-block"></div>
         </div>
 
         <div id="finished-tmpl" class="hide">
@@ -100,7 +113,7 @@
         </div>
 
         <div id="btnContainer">
-            <div class="left-align valign-wrapper">
+            <div class="left valign-wrapper">
                 <button type="button" class="btn blue-grey darken-1 center-block" id="prevStep">
                     <i class="material-icons left">chevron_left</i>Back
                 </button>

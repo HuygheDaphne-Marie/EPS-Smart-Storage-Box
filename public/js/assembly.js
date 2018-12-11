@@ -24,7 +24,7 @@
         document.querySelector('#nextStep').addEventListener('click', goNext);
         document.querySelector('#prevStep').addEventListener('click', goPrev);
 
-        //for(const item of window.orderedItems){           use just for random smartie colors
+        //for(const item of window.orderedItems){           //use just for random smartie colors
         //    item.color = '#' + Math.round(Math.random()*Math.pow(16,6)-1).toString(16).padStart(6, '0');
         //}
 
@@ -41,10 +41,13 @@
 
     function goPrev(){
         document.querySelector('#nextStep').classList.remove('hide');
-        if(currIndex === 0) {
+        if(currIndex===0){
             return;
         }
-        applyIndex(--currIndex);
+        if(--currIndex === 0) {
+            document.querySelector('#prevStep').classList.add('hide');
+        }
+        applyIndex(currIndex);
     }
 
     function applyIndex(){
