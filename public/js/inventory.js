@@ -28,9 +28,9 @@ function submitRequest(event) {
 }
 
 socket.on('item-update', itemData => {
-  console.log(itemData)
+  console.log(itemData);
   itemData.completed.forEach(item => {
-    document.querySelector(`#${item._UID} p`).innerHTML = `${item._name} (${item._UID}) has ${item._stock} units in stock`
+    document.querySelector(`#${item._UID} p`).innerHTML = `${item._name} (${item._UID}) has ${item._stock} units in stock`;
     if(item._stock === 0) {
       const card = document.querySelector(`#${item._UID}`);
       card.classList.toggle('grey');
@@ -44,11 +44,11 @@ socket.on('item-update', itemData => {
 
 $addBtn.forEach(btn => {
   btn.addEventListener('click', event => {
-    const item = request.find(itemRequest => {
+    /*const item = request.find(itemRequest => {
       return itemRequest.UID === btn.getAttribute('data-UID');
-    });
-
-    if(item !== undefined) {
+    });*/
+    const item = request[request.length - 1];
+    if(item && item.UID === btn.dataset.uid) {
       item.amount++;
     } else {
       request.push({name: btn.getAttribute('data-name'), UID: btn.getAttribute('data-UID'), amount: 1})
