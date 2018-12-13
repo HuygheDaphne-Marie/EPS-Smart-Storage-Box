@@ -23,6 +23,14 @@ class Item {
         this._name = newName;
     }
 
+    get color() {
+        return this._color;
+    }
+
+    get boxID() {
+        return this._boxID;
+    }
+
     get stock() {
         return this._stock;
     };

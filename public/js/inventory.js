@@ -16,7 +16,13 @@ function showRequest() {
   let HTMLstr = '';
   var loopcounter = 0;
   request.forEach(item => {
-    HTMLstr += `<li id="${loopcounter}" class="collection-item">${item.name} (ID: ${item.UID}): ${item.amount}<button class="right btn-flat btn-small transparent" onclick="removeItem(${loopcounter})"><i class="material-icons blue-grey-text">cancel</i></button></li>`;
+    HTMLstr += `<li id="${loopcounter}" class="collection-item">
+                    <i class="material-icons tiny" style="color: ${item.color}">brightness_1</i> 
+                    ${item.amount} x ${item.name} (ID: ${item.UID})
+                    <button class="right btn-flat btn-small transparent" onclick="removeItem(${loopcounter})">
+                        <i class="material-icons blue-grey-text">cancel</i>
+                    </button>
+                </li>`;
     loopcounter++;
   });
   $list.innerHTML = HTMLstr + '<li class="collection-item grey lighten-2"><button id="requestSubmit" class="btn grey" onclick="submitRequest(this)">Order</button></li>';
@@ -53,7 +59,13 @@ $addBtn.forEach(btn => {
     if(item && item.UID === btn.dataset.uid) {
       item.amount++;
     } else {
-      request.push({name: btn.getAttribute('data-name'), UID: btn.getAttribute('data-UID'), amount: 1})
+      request.push({
+          name: btn.getAttribute('data-name'),
+          UID: btn.getAttribute('data-UID'),
+          amount: 1,
+          color: btn.dataset.color,
+          boxID: btn.dataset.boxid
+      });
     }
     showRequest();
   })
