@@ -9,20 +9,21 @@ const SerialComms = require('./SerialComms');
 const Box = require('./Box');
 const Frame = require('./Frame');
 const serial = new SerialComms(process.argv[2]) 
+const frame = new Frame([new Box(Inventory.items[0], new Box(Inventory.items[1], new Box(Inventory.items[2])]);
 
-let obj = {
-  city: "St Polten",
-  weather: {
-    state: "rain",
-    temp: 5.0
-  }
-}
+// let obj = {
+//   city: "St Polten",
+//   weather: {
+//     state: "rain",
+//     temp: 5.0
+//   }
+// }
 
-const lel = () => {
-  serial.write(JSON.stringify(obj))
-}
+// const lel = () => {
+//   serial.write(JSON.stringify(obj))
+// }
 
-setInterval(lel, 5000)
+// setInterval(lel, 5000)
 
 // Setup / Middleware
 app.use(express.static(path.join(__dirname, 'public')));
@@ -38,28 +39,24 @@ io.on('connection', socket => {
     socket.emit('item-update', completedOrders);
   })
 
-  socket.on('led', lightOn => {
-    if(lightOn) {
-      serial.write('0');
-    } else {
-      serial.write('1');
-    }
-  })
-
-  socket.on('fullness', percent => {
-    serial.write(`${percent}`);
-  })
-
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
 });
 
 serial.on('message', data => {
-  if(data.type === "sensor") {
-    io.emit('sensor-update', data.value);
-  } else {
-    console.log('Uncatagorized message:', data)
+  switch(data.type) {
+    case 'READY':
+      console.log('Serial is ready...')
+      break;
+    case 'SENSOR':
+      const percentage = frame.calculatePercentages(data);
+      // Send data to arduino
+      // Send data to clients
+      break;
+    default:
+      console.log('Unhandeled message:', data)
+      break;
   }
 });
 
