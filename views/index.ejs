@@ -1,43 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <% include partials/styles %>
-  <link rel="stylesheet" href="css/inventory.css">
-  <title>Inventory</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <% include partials/styles %>
+    <link rel="stylesheet" href="css/inventory.css">
+    <title>Inventory</title>
 </head>
 <body>
 
-  <main>
+<main>
     <% include partials/sidemenu %>
     <section class="dashboard">
-      <ul class="item-list">
-        <% items.forEach(item => { %>
-          <button class="btn btn-large list-add" data-UID="<%= item.UID %>" data-name="<%= item.name %>">+</button>
-          <li id="<%= item.UID %>" class="card teal lighten-2 white-text item">
-            <div class="card-content">
-              <span class="card-title"><%= item.name %></span>
-              <p><%= item.toString() %></p>
-            </div>
-          </li>
-        <% }) %>
-      </ul>  
+        <ul class="item-list">
+            <% items.forEach(item => { %>
+                <button class="btn btn-large blue-grey darken-1 list-add z-depth-2"
+                        data-UID="<%= item.UID %>"
+                        data-name="<%= item.name %>">
+                    <i class="large material-icons">add</i></button>
+                <li id="<%= item.UID %>" class="card grey lighten-2 black-text item">
+                    <div class="card-content">
+                        <span class="card-title center-align "><%= item.name %></span>
+                        <p><%= item.toString() %></p>
+                    </div>
+                </li>
+            <% }) %>
+        </ul>
 
-      <button id="rTest" class="btn btn-large teal active">Request Test</button>
-      <ul id="requestList" class="collection">
-        <li class="collection-item teal lighten-2">
-          <button id="requestSubmit" class="btn teal" onclick="submitRequest(this)">Request</button>
-        </li>
-      </ul>
+        <button id="rTest" class="btn btn-large blue-grey darken-1 active">
+            <i class="large material-icons" style="padding-right: 10px;">inbox</i>order new parts
+        </button>
+        <ul id="requestList" class="collection">
+            <li class="collection-item blue-grey darken-1">
+                <button id="requestSubmit" class="btn blue-grey darken-1" onclick="submitRequest(this)">Request</button>
+            </li>
+        </ul>
 
     </section>
-  </main>
+</main>
 
-  <script type="text/javascript" src="js/materialize.min.js"></script>
-  <script src="/socket.io/socket.io.js"></script>
-  <script> let socket = io(); </script>
-  <script type="text/javascript" src="js/inventory.js"></script>
+<script type="text/javascript" src="js/materialize.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script> let socket = io(); </script>
+<script type="text/javascript" src="js/inventory.js"></script>
 </body>
 </html>

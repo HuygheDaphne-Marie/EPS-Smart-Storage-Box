@@ -4,27 +4,31 @@ const Request = require('./Request');
 class InventoryManager {
   constructor() {
     this.items = [
-      new Item('AAAAAA', 'Screw 30x6mm', 25), 
-      new Item('BBBBBB', 'Hammer', 2), 
-      new Item('CCCCCC', 'LEL', 280), 
-      new Item('DDDDDD', 'Memes', 52), 
-      new Item('EEEEEE', 'Frog', 82)
+      new Item('R1', 'Red Smartie', 10, 'red', 'b1'),
+      new Item('B1', 'Blue Smartie', 10, 'blue', 'b2'),
+      new Item('O1', 'Orange Smartie', 10, 'orange', 'b3'),
+      new Item('V1', 'Violet Smartie', 10, 'orchid', 'b4'),
+      new Item('G1', 'Green Smartie', 10, 'green', 'b5')
     ];
 
+    this._orderedItems = [];
+  }
 
+  get orderedItems(){
+    return this._orderedItems;
   }
 
   order(UID, amount) {
     const itemOrdered = this.items.find(item => {
       return item.UID === UID;
-    })
+    });
 
     try {
       itemOrdered.order(amount);
       return itemOrdered;
     } catch(err) {
       return {item: itemOrdered, err}
-    }  
+    }
   }
 
   RequestItems(request) {
@@ -32,15 +36,21 @@ class InventoryManager {
       completed: [],
       failed: []
     };
+    this._orderedItems = [];
 
     request.forEach(order => {
       const res = this.order(order.UID, order.amount);
       if(res.err === undefined) {
         orderStatus.completed.push(res);
+        this._orderedItems.push({
+            amount: order.amount,
+            item: res
+        });
       } else {
         orderStatus.failed.push(res);
       }
     });
+
     return orderStatus;
   }
 

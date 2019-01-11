@@ -1,8 +1,8 @@
 const $btn = document.querySelector('#rTest');
 const $list = document.querySelector('#requestList');
-const $addBtn = document.querySelectorAll('.list-add')
+const $addBtn = document.querySelectorAll('.list-add');
 
-let request = []
+let request = [];
 
 function ToggleRequestVisibility() {
   $btn.classList.toggle('active');
@@ -14,10 +14,12 @@ function ToggleRequestVisibility() {
 
 function showRequest() {
   let HTMLstr = '';
+  var loopcounter = 0;
   request.forEach(item => {
-    HTMLstr += `<li class="collection-item">${item.name} (${item.UID}): ${item.amount}</li>`
-  })
-  $list.innerHTML = HTMLstr + '<li class="collection-item teal lighten-2"><button id="requestSubmit" class="btn teal" onclick="submitRequest(this)">Request</button></li>';
+    HTMLstr += `<li id="${loopcounter}" class="collection-item">${item.name} (ID: ${item.UID}): ${item.amount}<button class="right btn-flat btn-small transparent" onclick="removeItem(${loopcounter})"><i class="material-icons blue-grey-text">cancel</i></button></li>`;
+    loopcounter++;
+  });
+  $list.innerHTML = HTMLstr + '<li class="collection-item grey lighten-2"><button id="requestSubmit" class="btn grey" onclick="submitRequest(this)">Order</button></li>';
 }
 
 function submitRequest(event) {
@@ -28,33 +30,40 @@ function submitRequest(event) {
 }
 
 socket.on('item-update', itemData => {
-  console.log(itemData)
+  console.log(itemData);
   itemData.completed.forEach(item => {
-    document.querySelector(`#${item._UID} p`).innerHTML = `${item._name} (${item._UID}) has ${item._stock} units in stock`
+    document.querySelector(`#${item._UID} p`).innerHTML = `${item._name} (${item._UID}) has ${item._stock} units in stock`;
     if(item._stock === 0) {
       const card = document.querySelector(`#${item._UID}`);
-      card.classList.toggle('teal');
+      card.classList.toggle('grey');
       card.classList.toggle('red')
     }
-  })
+  });
   itemData.failed.forEach(fail => {
     M.toast({html: `Request for ${fail.item._name} failed, ${fail.err}`})
   })
-})
+});
 
 $addBtn.forEach(btn => {
   btn.addEventListener('click', event => {
-    const item = request.find(itemRequest => {
+    /*const item = request.find(itemRequest => {
       return itemRequest.UID === btn.getAttribute('data-UID');
-    })
-
-    if(item !== undefined) {
+    });*/
+    const item = request[request.length - 1];
+    if(item && item.UID === btn.dataset.uid) {
       item.amount++;
     } else {
       request.push({name: btn.getAttribute('data-name'), UID: btn.getAttribute('data-UID'), amount: 1})
     }
     showRequest();
   })
-})
+});
+
+function removeItem(count){
+    request.splice(count, 1);
+    var element = document.getElementById(count);
+    element.parentNode.removeChild(element);
+    console.log(request);
+}
 
 $btn.addEventListener('click', ToggleRequestVisibility);
