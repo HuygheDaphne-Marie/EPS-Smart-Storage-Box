@@ -3,24 +3,6 @@ const express = require('express');
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
-const mysql = require('mysql');
-
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root', // Add user
-  password: '', // Add password
-  database : 'storagebox'
-})
-
-connection.connect()
-connection.query('SELECT * FROM ITEM', function (err, rows, fields) {
-  if (err) throw err
-  rows.forEach(row => {
-    console.log(row)
-  });
-})
-connection.end()
-
 
 const Inventory = require('./InventoryManger');
 const SerialComms = require('./SerialComms');

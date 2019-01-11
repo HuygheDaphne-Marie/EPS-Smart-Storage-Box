@@ -1,17 +1,29 @@
 const Item = require('./Item');
 const Request = require('./Request');
+const mysql = require('mysql');
+
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root', // Add user
+  password: '', // Add password
+  database : 'storagebox'
+})
 
 class InventoryManager {
   constructor() {
-    this.items = [
-      new Item('AAAAAA', 'Screw 30x6mm', 25), 
-      new Item('BBBBBB', 'Hammer', 2), 
-      new Item('CCCCCC', 'LEL', 280), 
-      new Item('DDDDDD', 'Memes', 52), 
-      new Item('EEEEEE', 'Frog', 82)
-    ];
+    this.items = [];
+    this.fetchItems(this.items);
+  }
 
-
+  fetchItems(items) {
+    connection.connect()
+    connection.query('SELECT * FROM item', (err, rows, fields) => {
+      if (err) throw err
+      rows.forEach(row => {
+        items.push(new Item(row.id, row.name, row.stock))
+      })
+    })
+    connection.end()
   }
 
   order(UID, amount) {
