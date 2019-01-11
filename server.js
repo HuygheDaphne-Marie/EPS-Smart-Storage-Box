@@ -38,13 +38,10 @@ io.on('connection', socket => {
     console.log(req)
     const completedOrders = Inventory.RequestItems(req);
     socket.emit('item-update', completedOrders);
-<<<<<<< HEAD
 
     // Send blinking light to box
   })
-=======
-  });
->>>>>>> b47fb2b845818e831f409d89a09bf689bb6495ee
+
 
   socket.on('disconnect', () => {
     console.log('user disconnected');
