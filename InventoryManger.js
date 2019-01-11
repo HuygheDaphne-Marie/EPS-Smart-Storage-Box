@@ -11,7 +11,6 @@ const connection = mysql.createConnection({
 
 class InventoryManager {
   constructor() {
-<<<<<<< HEAD
     this.items = [];
     this.fetchItems(this.items);
   }
@@ -25,21 +24,6 @@ class InventoryManager {
       })
     })
     connection.end()
-=======
-    this.items = [
-      new Item('R1', 'Red Smartie', 10, 'red', 'b1'),
-      new Item('B1', 'Blue Smartie', 10, 'blue', 'b2'),
-      new Item('O1', 'Orange Smartie', 10, 'orange', 'b3'),
-      new Item('V1', 'Violet Smartie', 10, 'orchid', 'b4'),
-      new Item('G1', 'Green Smartie', 10, 'green', 'b5')
-    ];
-
-    this._orderedItems = [];
-  }
-
-  get orderedItems(){
-    return this._orderedItems;
->>>>>>> b47fb2b845818e831f409d89a09bf689bb6495ee
   }
 
   order(UID, amount) {
