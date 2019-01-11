@@ -35,16 +35,20 @@ io.on('connection', socket => {
 
   socket.on('request-order', requestData => {
     let req = JSON.parse(requestData);
+    console.log(req)
     const completedOrders = Inventory.RequestItems(req);
     socket.emit('item-update', completedOrders);
-  });
+
+    // Send blinking light to box
+  })
+
 
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
 });
 
-if(typeof(serial) !== 'undefined') {
+if (typeof(serial) !== 'undefined') {
   serial.on('message', data => {
     switch(data.type) {
       case 'READY':
@@ -61,7 +65,7 @@ if(typeof(serial) !== 'undefined') {
     }
   });
 } else {
-  console.log('WARN: Running without serial connection, something might not work...')
+  console.log('WARN: Currently running without serial connection, some things might not work...')
 }
 
 

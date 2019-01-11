@@ -1,8 +1,31 @@
 const Item = require('./Item');
 const Request = require('./Request');
+const mysql = require('mysql');
+
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root', // Add user
+  password: '', // Add password
+  database : 'storagebox'
+})
 
 class InventoryManager {
   constructor() {
+<<<<<<< HEAD
+    this.items = [];
+    this.fetchItems(this.items);
+  }
+
+  fetchItems(items) {
+    connection.connect()
+    connection.query('SELECT * FROM item', (err, rows, fields) => {
+      if (err) throw err
+      rows.forEach(row => {
+        items.push(new Item(row.id, row.name, row.stock))
+      })
+    })
+    connection.end()
+=======
     this.items = [
       new Item('R1', 'Red Smartie', 10, 'red', 'b1'),
       new Item('B1', 'Blue Smartie', 10, 'blue', 'b2'),
@@ -16,6 +39,7 @@ class InventoryManager {
 
   get orderedItems(){
     return this._orderedItems;
+>>>>>>> b47fb2b845818e831f409d89a09bf689bb6495ee
   }
 
   order(UID, amount) {
