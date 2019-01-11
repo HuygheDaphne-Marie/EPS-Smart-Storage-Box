@@ -8,7 +8,7 @@ const Inventory = require('./InventoryManger');
 const SerialComms = require('./SerialComms');
 const Box = require('./Box');
 const Frame = require('./Frame');
-const serial = new SerialComms(process.argv[2]) 
+//const serial = new SerialComms(process.argv[2]) 
 const frame = new Frame([new Box(Inventory.items[0]), new Box(Inventory.items[1]), new Box(Inventory.items[2])]);
 
 // let obj = {
@@ -44,21 +44,26 @@ io.on('connection', socket => {
   });
 });
 
-serial.on('message', data => {
-  switch(data.type) {
-    case 'READY':
-      console.log('Serial is ready...')
-      break;
-    case 'SENSOR':
-      const percentage = frame.calculatePercentages(data);
-      // Send data to arduino
-      // Send data to clients
-      break;
-    default:
-      console.log('Unhandeled message:', data)
-      break;
-  }
-});
+if(typeof(serial) !== 'undefined') {
+  serial.on('message', data => {
+    switch(data.type) {
+      case 'READY':
+        console.log('Serial is ready...')
+        break;
+      case 'SENSOR':
+        const percentage = frame.calculatePercentages(data);
+        // Send data to arduino
+        // Send data to clients
+        break;
+      default:
+        console.log('Unhandeled message:', data)
+        break;
+    }
+  });
+} else {
+  console.log('WARN: Running without serial connection, something might not work...')
+}
+
 
 // INIT
 const PORT = process.env.PORT || 5000;
