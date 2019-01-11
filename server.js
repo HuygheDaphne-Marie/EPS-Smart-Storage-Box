@@ -35,8 +35,11 @@ io.on('connection', socket => {
 
   socket.on('request-order', requestData => {
     let req = JSON.parse(requestData);
+    console.log(req)
     const completedOrders = Inventory.RequestItems(req);
     socket.emit('item-update', completedOrders);
+
+    // Send blinking light to box
   })
 
   socket.on('disconnect', () => {
@@ -60,6 +63,8 @@ if (typeof(serial) !== 'undefined') {
         break;
     }
   });
+} else {
+  console.log('WARN: Currently running without serial connection, some things might not work...')
 }
 
 
