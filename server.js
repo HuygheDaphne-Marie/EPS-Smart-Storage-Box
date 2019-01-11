@@ -38,9 +38,13 @@ io.on('connection', socket => {
     console.log(req)
     const completedOrders = Inventory.RequestItems(req);
     socket.emit('item-update', completedOrders);
+<<<<<<< HEAD
 
     // Send blinking light to box
   })
+=======
+  });
+>>>>>>> b47fb2b845818e831f409d89a09bf689bb6495ee
 
   socket.on('disconnect', () => {
     console.log('user disconnected');
@@ -81,7 +85,10 @@ app.get('/', (req, res) => {
 app.get('/dashboard', (req, res) => {
   res.render('dashboard');
 });
+app.get('/assembly', (req, res) => {
+    res.render('assembly', {items:Inventory.orderedItems});
+});
 app.get('/sensor', (req, res) => {
   res.sendFile(path.join(__dirname, 'views/sensor.html'))
-})
+});
 
