@@ -3,6 +3,8 @@ const Ready = require('@serialport/parser-ready')
 const {StringStream} = require('scramjet');
 const EventEmitter = require('events');
 
+const sleep = (ms) => {return new Promise(resolve => setTimeout(resolve, ms));};
+
 class SerialComms extends EventEmitter {
   constructor(portname) {
     super();
@@ -13,34 +15,25 @@ class SerialComms extends EventEmitter {
     this.reader = this.port.pipe(new StringStream).lines('\n').each(data => this.receive(data));
   }
 
-  write(data) {
+  async write(data) {
     if(this._ready) {
-      this.port.write(data)
-      console.log('WRITTEN:', data)
+      this.port.write(data);
+    } else {
+      await sleep(100);
+      this.write(data);
     }
   }
 
   receive(data) {
-    let original = data
-    data = data.split(':').map(elem => elem.replace('\r', ''))
-    let message;
-    if(data.length === 1) {
-      if(!isNaN(data[0])) {
-        message = {
-          type: 'sensor',
-          value: data[0]
-        }
-      } else {
-        message = data[0];
-      }
-    } else {
-      message =  original
-      // {
-      //   type: data[0],
-      //   value: data[1]
-      // }
+    console.log(JSON.parse(data));
+    // const message = JSON.parse(data)
+    const message = {
+      type: 'SENSOR',
+      boxes: [
+        {value: 120},
+        {value: 12}
+      ]
     }
-    
     this.emit('message', message)
   }
 }

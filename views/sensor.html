@@ -30,6 +30,7 @@
     const $high = document.getElementById('high');
     const $low = document.getElementById('low');
     const $avg = document.getElementById('avg');
+
     const $reset = document.getElementById('reset').addEventListener('click', e => {
       high = 0;
       low = 0;
@@ -56,21 +57,17 @@
 
     $percent = document.getElementById('percent')
 
-    $zerohigh = document.getElementById('zerohigh').addEventListener('click', e => {zerohigh = true})
-    let zero = false;
-    let zerolow;
-    let zerohigh;
-    const $zero = document.getElementById('zero').addEventListener('click', e => {
-      zero = true;
-      zerolow = low;
-    });
+    // $zerohigh = document.getElementById('zerohigh').addEventListener('click', e => {zerohigh = true})
+    // let zero = false;
+    // let zerolow;
+    // let zerohigh;
+    // const $zero = document.getElementById('zero').addEventListener('click', e => {
+    //   zero = true;
+    //   zerolow = true;
+    // });
     const scale = (num, in_min, in_max, out_min, out_max) => {
       return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
     }
-
-
-
-
 
     socket.on('sensor-update', value => {
       value = parseInt(value)
@@ -80,16 +77,25 @@
       if(low == 0 || value < low) {
         low = value;
       }
-      if(zerohigh === true) {
-        zerohigh = value;
-      }
-      if(zero) {
-        let weight = (Math.round(scale(value, zerolow, zerohigh, 0, 100)) < 0) ? 0 : Math.round(scale(value, zerolow, zerohigh, 0, 100));
-        let fullness = (100-weight < 0) ? 'Empty' : (100-weight)+"%";
-        $percent.innerHTML = fullness;
-        // send fullness to server..
-        socket.emit('fullness', 100-weight);
-      }
+      // if(zerolow === true) {
+      //   zerolow = value;
+      // }
+      // if(zerohigh === true) {
+      //   zerohigh = value;
+      // }
+      // if(zero) {
+      //   let weight = Math.round(scale(value, zerolow, zerohigh, 0, 100));
+      //   if(weight > 100) {
+      //     weight = 100;
+      //   }
+      //   if(weight < 0) {
+      //     weight = 0;
+      //   }
+      //   let fullness = (value < zerolow-10000) ? 'Empty' : (weight)+"%";
+      //   $percent.innerHTML = fullness;
+      //   // send fullness to server..
+      //   socket.emit('fullness', weight);
+      // }
 
       amount += 1;
       sum += value;
@@ -99,7 +105,6 @@
       $high.innerHTML = `All time high: ${high}`;
       $low.innerHTML = `All time low: ${low}`;
       $avg.innerHTML = `Average: ${avg}`;
-      console.log(amount)
     })
 
     // let lightOn = false;
