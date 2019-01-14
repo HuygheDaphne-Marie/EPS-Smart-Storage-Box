@@ -8,7 +8,7 @@ const Inventory = require('./InventoryManger');
 const SerialComms = require('./SerialComms');
 const Box = require('./Box');
 const Frame = require('./Frame');
-//const serial = new SerialComms(process.argv[2]) 
+// const serial = new SerialComms(process.argv[2]) 
 const frame = new Frame([new Box(Inventory.items[0]), new Box(Inventory.items[1]), new Box(Inventory.items[2])]);
 
 // let obj = {
@@ -35,11 +35,19 @@ io.on('connection', socket => {
 
   socket.on('request-order', requestData => {
     let req = JSON.parse(requestData);
-    console.log(req)
     const completedOrders = Inventory.RequestItems(req);
     socket.emit('item-update', completedOrders);
 
-    // Send blinking light to box
+    completedOrders.forEach(order => {
+      
+    })
+
+    // for each item find out which box is needed
+    // make that box blink
+    // get confirmation from client that item has been taken by box
+    // do this for each item in the order..
+
+    // serial.write(JSON.parse({type: 'BLINK', box: 2}))
   })
 
 

@@ -2,6 +2,7 @@ const Item = require('./Item');
 const Request = require('./Request');
 const mysql = require('mysql');
 
+
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root', // Add user
