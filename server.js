@@ -8,8 +8,11 @@ const Inventory = require('./InventoryManger');
 const SerialComms = require('./SerialComms');
 const Box = require('./Box');
 const Frame = require('./Frame');
-// const serial = new SerialComms(process.argv[2]) 
+const serial = new SerialComms(process.argv[2]) 
 const frame = new Frame([new Box(Inventory.items[0]), new Box(Inventory.items[1]), new Box(Inventory.items[2])]);
+
+
+
 
 // let obj = {
 //   city: "St Polten",
@@ -19,11 +22,22 @@ const frame = new Frame([new Box(Inventory.items[0]), new Box(Inventory.items[1]
 //   }
 // }
 
+// {
+//   boxes: [
+//     {weight: 50600},
+//     {weight: 600}
+//   ]
+// }
+
 // const lel = () => {
 //   serial.write(JSON.stringify(obj))
 // }
 
 // setInterval(lel, 5000)
+
+
+
+
 
 // Setup / Middleware
 app.use(express.static(path.join(__dirname, 'public')));
@@ -60,6 +74,7 @@ if (typeof(serial) !== 'undefined') {
         break;
       case 'SENSOR':
         const percentage = frame.calculatePercentages(data);
+        console.log('GET SENSOR INFO', percentage)
         // Send data to arduino
         // Send data to clients
         break;

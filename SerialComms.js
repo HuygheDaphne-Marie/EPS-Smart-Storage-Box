@@ -25,16 +25,12 @@ class SerialComms extends EventEmitter {
   }
 
   receive(data) {
-    console.log(JSON.parse(data));
-    // const message = JSON.parse(data)
-    const message = {
-      type: 'SENSOR',
-      boxes: [
-        {value: 120},
-        {value: 12}
-      ]
+    if(data.length > 5) {
+      // console.log(data)
+      // console.log(JSON.parse(data));
+      const message = JSON.parse(data)
+      this.emit('message', message)
     }
-    this.emit('message', message)
   }
 }
 
