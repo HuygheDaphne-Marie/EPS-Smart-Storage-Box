@@ -38,10 +38,6 @@ io.on('connection', socket => {
     const completedOrders = Inventory.RequestItems(req);
     socket.emit('item-update', completedOrders);
 
-    completedOrders.forEach(order => {
-      
-    })
-
     // for each item find out which box is needed
     // make that box blink
     // get confirmation from client that item has been taken by box
