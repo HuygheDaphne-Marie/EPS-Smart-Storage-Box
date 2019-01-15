@@ -41,6 +41,7 @@ class Item {
         return {
             name: this._name,
             UID: this._UID,
+            stock: this._stock
         };
     }
 

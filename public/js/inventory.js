@@ -32,15 +32,16 @@ function submitRequest(event) {
 socket.on('item-update', itemData => {
   console.log(itemData);
   itemData.completed.forEach(item => {
-    document.querySelector(`#${item._UID} p`).innerHTML = `${item._name} (${item._UID}) has ${item._stock} units in stock`;
+    console.log("GETTING", item.UID)
+    document.querySelector(`#ITEM${item.UID} p`).innerHTML = `${item.name} (${item.UID}) has ${item.stock} units in stock`;
     if(item._stock === 0) {
-      const card = document.querySelector(`#${item._UID}`);
+      const card = document.querySelector(`#${item.UID}`);
       card.classList.toggle('grey');
       card.classList.toggle('red')
     }
   });
   itemData.failed.forEach(fail => {
-    M.toast({html: `Request for ${fail.item._name} failed, ${fail.err}`})
+    M.toast({html: `Request for ${fail.item.name} failed, ${fail.err}`})
   })
 });
 
