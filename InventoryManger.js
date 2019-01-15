@@ -42,16 +42,11 @@ class InventoryManager {
       completed: [],
       failed: []
     };
-    this._orderedItems = [];
 
     request.forEach(order => {
       const res = this.orderItem(order.UID, order.amount);
       if(res.err === undefined) {
         orderStatus.completed.push(res);
-        this._orderedItems.push({
-            amount: order.amount,
-            item: res
-        });
       } else {
         orderStatus.failed.push(res);
       }
