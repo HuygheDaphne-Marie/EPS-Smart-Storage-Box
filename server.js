@@ -8,7 +8,7 @@ const Inventory = require('./InventoryManger');
 const SerialComms = require('./SerialComms');
 const Box = require('./Box');
 const Frame = require('./Frame');
-const serial = new SerialComms(process.argv[2]) 
+// const serial = new SerialComms(process.argv[2]) 
 const frame = new Frame([new Box(Inventory.items[0]), new Box(Inventory.items[1]), new Box(Inventory.items[2])]);
 
 // Setup / Middleware
