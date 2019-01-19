@@ -34,6 +34,12 @@ io.on('connection', socket => {
     // serial.write(JSON.parse({type: 'BLINK', box: 2}))
   })
 
+  socket.on('restock-order', restockData => {
+    let data = JSON.parse(restockData);
+    const completedRestock = Inventory.restockItems(data)
+    socket.emit('item-update', completedRestock);
+  })
+
 
   socket.on('disconnect', () => {
     console.log('user disconnected');

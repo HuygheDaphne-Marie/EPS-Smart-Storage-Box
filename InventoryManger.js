@@ -41,6 +41,19 @@ class InventoryManager {
     }
   }
 
+  restockItem(UID, amount) {
+    const itemOrdered = this.items.find(item => {
+      return item.UID == UID;
+    });
+
+    try {
+      itemOrdered.restock(amount);
+      return itemOrdered;
+    } catch(err) {
+      return {item: itemOrdered, err}
+    }
+  }
+
   RequestItems(request) {
     let orderStatus = {
       completed: [],
@@ -49,6 +62,28 @@ class InventoryManager {
 
     request.forEach(order => {
       const res = this.orderItem(order.UID, order.amount);
+      if(res.err === undefined) {
+        orderStatus.completed.push(res);
+      } else {
+        orderStatus.failed.push(res);
+      }
+    });
+
+    fs.writeFile('items.json', JSON.stringify(this.items), err => {
+      if (err) throw err;
+      console.log('Items has been saved!');
+    })
+    return orderStatus;
+  }
+
+  restockItems(restock) {
+    let orderStatus = {
+      completed: [],
+      failed: []
+    };
+
+    restock.forEach(item => {
+      const res = this.restockItem(item.UID, item.amount);
       if(res.err === undefined) {
         orderStatus.completed.push(res);
       } else {
