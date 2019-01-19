@@ -23,7 +23,6 @@ io.on('connection', socket => {
     // Check if order is OK & everything can be ordered
     let req = JSON.parse(requestData);
     const completedOrders = Inventory.RequestItems(req);
-    console.log(completedOrders)
     socket.emit('item-update', completedOrders);
 
     // Receive from client they're taking an item out (along with the item name/ID)

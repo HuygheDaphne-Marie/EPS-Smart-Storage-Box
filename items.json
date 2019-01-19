@@ -1,1 +1,1 @@
-[{"id":1,"name":"Dowel","stock":5},{"id":2,"name":"Bolt","stock":10},{"id":3,"name":"Nut","stock":15},{"id":4,"name":"Nail","stock":7}]
+[{"name":"Dowel","UID":1,"stock":5},{"name":"Bolt","UID":2,"stock":10},{"name":"Nut","UID":3,"stock":15},{"name":"Nail","UID":4,"stock":7}]

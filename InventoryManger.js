@@ -12,7 +12,7 @@ class InventoryManager {
     // })
     this.items = [];
     JSON.parse(fs.readFileSync('items.json', 'utf8')).forEach(itemdata => {
-      this.items.push(new Item(itemdata.id, itemdata.name, itemdata.stock));
+      this.items.push(new Item(itemdata.UID, itemdata.name, itemdata.stock));
     })
     // this.fetchItems(this.items);
   }
@@ -56,6 +56,10 @@ class InventoryManager {
       }
     });
 
+    fs.writeFile('items.json', JSON.stringify(this.items), err => {
+      if (err) throw err;
+      console.log('Items has been saved!');
+    })
     return orderStatus;
   }
 }
