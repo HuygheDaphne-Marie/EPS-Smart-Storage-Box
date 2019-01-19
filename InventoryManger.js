@@ -10,11 +10,16 @@ class InventoryManager {
     //   password: '', // Add password
     //   database : 'storagebox'
     // })
+    this._orderedItems = [];
     this.items = [];
     JSON.parse(fs.readFileSync('items.json', 'utf8')).forEach(itemdata => {
       this.items.push(new Item(itemdata.UID, itemdata.name, itemdata.stock));
     })
     // this.fetchItems(this.items);
+  }
+
+  get orderedItems(){
+    return this._orderedItems;
   }
 
   // fetchItems(items) {
@@ -64,6 +69,10 @@ class InventoryManager {
       const res = this.orderItem(order.UID, order.amount);
       if(res.err === undefined) {
         orderStatus.completed.push(res);
+        this._orderedItems.push({
+          amount: order.amount,
+          item: res
+        });
       } else {
         orderStatus.failed.push(res);
       }
