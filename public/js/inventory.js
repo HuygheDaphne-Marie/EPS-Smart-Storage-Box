@@ -34,8 +34,8 @@ socket.on('item-update', itemData => {
   itemData.completed.forEach(item => {
     console.log("GETTING", item.UID)
     document.querySelector(`#ITEM${item.UID} p`).innerHTML = `${item.name} (${item.UID}) has ${item.stock} units in stock`;
-    if(item._stock === 0) {
-      const card = document.querySelector(`#${item.UID}`);
+    if(item.stock === 0) {
+      const card = document.querySelector(`#ITEM${item.UID}`);
       card.classList.toggle('grey');
       card.classList.toggle('red')
     }

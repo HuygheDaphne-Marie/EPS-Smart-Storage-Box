@@ -46,6 +46,7 @@ if (typeof(serial) !== 'undefined') {
     switch(data.type) {
       case 'READY':
         console.log('Serial is ready...')
+        // Send something back to the arduino so that it's loop can begin??? ==> might allow for no or less delay in the loop
         break;
       case 'SENSOR':
         const percentage = frame.calculatePercentages(data);
