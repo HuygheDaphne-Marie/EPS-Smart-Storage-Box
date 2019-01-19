@@ -24,6 +24,11 @@ function updateItemInfo(e) {
   }
 }
 
-socket.on('item-update', data => {
-  console.log(data)
+socket.on('item-update', input => {
+  let data = JSON.parse(input)
+  console.log(`#ITEM${data.UID} span`)
+  document.querySelector(`#ITEM${data.UID} span`).innerHTML = data.name;
+  document.querySelector(`#ITEM${data.UID}-stock`).value = data.stock;
+  document.querySelector(`#ITEM${data.UID}-name`).value = data.name;
+
 })
