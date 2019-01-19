@@ -5,6 +5,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <% include partials/styles %>
+  <style>
+    main .dashboard {
+      padding: 2rem;
+    }
+
+    main .dashboard .item-list {
+      display: -ms-grid;
+      display: grid;
+      -ms-grid-columns: 1fr 1fr;
+          grid-template-columns: 1fr 1fr;
+      -webkit-column-gap: 1rem;
+              column-gap: 1rem;
+      row-gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    main .dashboard .item-list .card {
+      margin: 0;
+    }
+
+    .card form .inputs {
+      display: -ms-grid;
+      display: grid;
+      -ms-grid-columns: 1fr 1fr;
+          grid-template-columns: 1fr 1fr;
+      -webkit-column-gap: 1rem;
+              column-gap: 1rem;
+      row-gap: 1rem;
+    }
+  </style>
   <title>Admin</title>
 </head>
 <body>
@@ -12,7 +42,28 @@
   <main>
       <% include partials/sidemenu %>
       <section class="dashboard">
-
+        <ul class="item-list">
+            <% items.forEach(item => { %>
+              <li id="ITEM<%= item.UID %>" class="card grey lighten-2 black-text item">
+                <div class="card-content">
+                    <span class="card-title center-align "><%= item.name %></span>
+                    <form>
+                      <div class="inputs">
+                          <div class="stock">
+                              <label for="stock">Stock</label>
+                              <input type="number" name="stock" id="ITEM<%= item.UID %>-stock">
+                            </div>
+                            <div class="name">
+                              <label for="name">Name</label>
+                              <input type="text" name="text" id="ITEM<%= item.UID %>-name">
+                            </div>
+                      </div>
+                      <button type="submit" class="btn btn-large blue-grey darken-1" id="ITEM<%= item.UID %>-submit">Submit</button>
+                    </form>
+                </div>
+            </li>
+            <% }) %>
+        </ul>
       </section>
   </main>
   
