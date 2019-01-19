@@ -85,26 +85,30 @@ class InventoryManager {
     return orderStatus;
   }
 
-  restockItems(restock) {
-    let orderStatus = {
-      completed: [],
-      failed: []
-    };
-
-    restock.forEach(item => {
-      const res = this.restockItem(item.UID, item.amount);
-      if(res.err === undefined) {
-        orderStatus.completed.push(res);
-      } else {
-        orderStatus.failed.push(res);
-      }
+  updateItem(update) {
+    const itemToChange = this.items.find(item => {
+      return item.UID == update.UID;
     });
 
-    fs.writeFile('items.json', JSON.stringify(this.items), err => {
-      if (err) throw err;
-      console.log('Items has been saved!');
-    })
-    return orderStatus;
+    if(itemToChange.name !== update.name || itemToChange.stock !== parseInt(update.stock)) {
+      console.log('not same')
+      itemToChange.name = update.name;
+      itemToChange.stock = parseInt(update.stock);
+
+      fs.writeFile('items.json', JSON.stringify(this.items), err => {
+        if (err) throw err;
+        console.log('Items has been saved!');
+      })
+      return itemToChange;
+    }
+    // restock.forEach(item => {
+    //   const res = this.restockItem(item.UID, item.amount);
+    //   if(res.err === undefined) {
+    //     orderStatus.completed.push(res);
+    //   } else {
+    //     orderStatus.failed.push(res);
+    //   }
+    // });
   }
 }
 
