@@ -8,7 +8,7 @@ const Inventory = require('./InventoryManger');
 const SerialComms = require('./SerialComms');
 const Box = require('./Box');
 const Frame = require('./Frame');
-// const serial = new SerialComms(process.argv[2]) 
+const serial = new SerialComms(process.argv[2]) 
 const frame = new Frame([new Box(Inventory.items[0]), new Box(Inventory.items[1]), new Box(Inventory.items[2])]);
 
 // Setup / Middleware
@@ -54,8 +54,9 @@ if (typeof(serial) !== 'undefined') {
         // Send something back to the arduino so that it's loop can begin??? ==> might allow for no or less delay in the loop
         break;
       case 'SENSOR':
+        console.log(data)
         const percentage = frame.calculatePercentages(data);
-        console.log('GET SENSOR INFO', percentage)
+        //console.log('GET SENSOR INFO', percentage)
         // Send data to arduino ==> is this even nececary if we won't use lights on them by default?
         // Send data to clients
         break;
