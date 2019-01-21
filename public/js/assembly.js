@@ -21,7 +21,7 @@
         document.querySelector('#nextStep').classList.add('hide');
         document.querySelector('#startAssembly').addEventListener('click', startAssembly);
         document.querySelector('#nextStep').addEventListener('click', goNext);
-        document.querySelector('#prevStep').addEventListener('click', goPrev);
+        //document.querySelector('#prevStep').addEventListener('click', goPrev);
 
         //for(const item of window.orderedItems){           //use just for random smartie colors
         //    item.color = '#' + Math.round(Math.random()*Math.pow(16,6)-1).toString(16).padStart(6, '0');
@@ -38,7 +38,7 @@
     }
 
     function goNext(){
-        document.querySelector('#prevStep').classList.remove('hide');
+        //document.querySelector('#prevStep').classList.remove('hide');
         if(currIndex >= window.orderedItems.length * 2){
             return;
         }
@@ -51,7 +51,7 @@
             return;
         }
         if(--currIndex === 0) {
-            document.querySelector('#prevStep').classList.add('hide');
+            //document.querySelector('#prevStep').classList.add('hide');
         }
         applyIndex(currIndex);
     }
@@ -68,6 +68,11 @@
     }
 
     function applyIndex(){
+      // Notify backend which item is being taken..
+      let idx = Math.floor(currIndex/2)
+      // console.log('CURR', window.orderedItems[idx]) // Used for finding right idx
+      SocketIO.emit('BLINK', window.orderedItems[idx].item)
+
         yourOrderTemplate.classList.add('hide');
         takePartTemplate.classList.add('hide');
         assemblyTemplate.classList.add('hide');
@@ -111,7 +116,7 @@
         amountEl.textContent = currItem.amount;
         typeEl.textContent = currItem.item.name;
 
-        console.log(window.orderedItems);
+        //console.log(window.orderedItems);
     }
 
     function updateFinishTemplate(){

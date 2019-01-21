@@ -64,6 +64,7 @@ class InventoryManager {
       completed: [],
       failed: []
     };
+    this._orderedItems = [];
 
     request.forEach(order => {
       const res = this.orderItem(order.UID, order.amount);
