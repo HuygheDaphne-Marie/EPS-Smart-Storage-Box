@@ -71,20 +71,22 @@
       // Notify backend which item is being taken..
       let idx = Math.floor(currIndex/2)
       // console.log('CURR', window.orderedItems[idx]) // Used for finding right idx
-      SocketIO.emit('BLINK', window.orderedItems[idx].item)
+      if(typeof(window.orderedItems[idx]) !== 'undefined') {
+        socket.emit('BLINK', window.orderedItems[idx].item)
+      }
 
-        yourOrderTemplate.classList.add('hide');
-        takePartTemplate.classList.add('hide');
-        assemblyTemplate.classList.add('hide');
-        finishedTemplate.classList.add('hide');
+      yourOrderTemplate.classList.add('hide');
+      takePartTemplate.classList.add('hide');
+      assemblyTemplate.classList.add('hide');
+      finishedTemplate.classList.add('hide');
 
-        if(currIndex >= orderedItems.length * 2){
-            return updateFinishTemplate();
-        }
-        if(currIndex % 2 === 0){
-            return updateTakeItemTemplate();
-        }
-        return updateAssemblyTemplate();
+      if(currIndex >= orderedItems.length * 2){
+        return updateFinishTemplate();
+      }
+      if(currIndex % 2 === 0){
+        return updateTakeItemTemplate();
+      }
+      return updateAssemblyTemplate();
     }
 
     function updateAssemblyTemplate(){

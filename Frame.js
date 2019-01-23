@@ -17,6 +17,16 @@ class Frame {
     this.boxes.splice(index, 1);
   }
 
+  boxWithItem(UID) {
+    let boxIdx = -1;
+    for(let i = 0; i < this.boxes.length; i++) {
+      if(boxes[i].itemHeld.UID == UID) {
+        boxIdx = i;
+      }
+    }
+    return boxIdx;
+  }
+
   calculatePercentages(frameData) {
     const percentagesMessage = {
       type: 'PERCENT',
