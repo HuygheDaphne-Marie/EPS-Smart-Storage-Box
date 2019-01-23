@@ -43,7 +43,9 @@ io.on('connection', socket => {
 
   socket.on('BLINK', blinkData => {
     console.log(blinkData);
-    //serial.write(JSON.stringify({type: 'BLINK', box: frame.boxWithItem(blinkData.UID)}))
+    if(typeof(serial) !== 'undefined') {
+      //serial.write(JSON.stringify({type: 'BLINK', box: frame.boxWithItem(blinkData.UID)}))
+    }
   })
 
   socket.on('disconnect', () => {
